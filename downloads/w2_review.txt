@@ -1,0 +1,62 @@
+[2001:288:6004:17::53]:3128
+140.130.17.53:3128
+140.130.17.254 (系 gateway 通道)
+NAT network address translation
+internal network (內部網路) 192.168.*
+ip address mapping 對應
+router 路由器
+route 路徑
+remote login 遠端登入
+
+packet 封包
+
+[2001:288:6004:17::53]:3128
+7
+17
+42
+
+中華電信 dns server
+2001:b000:168::1
+dns == domain name server 符號名稱伺服器
+
+www.nfu.edu.tw == ipv4/ipv6 address 
+
+client <-> server
+WWW
+browser <-> WWW server
+chrome, firefox, edge <-> http.server, nginx, apache....
+HTTP == hypertext transfer protocol 超文件傳輸協定
+sftp client <-> sftp server
+sftp == secure file transfer protocol 安全模式下的檔案傳輸協定
+
+types of computer
+
+    1. super computer 超級電腦
+    2. mainframe 伺服器主機 (cluster 叢集)
+    3. server 伺服器 (實體, 虛擬)
+    4. personal computer (個人電腦)
+    5. microcontroller (微控制器) rasberry pi 樹莓派 (小 pc) embedded 嵌入式
+    6. mobile phone (手機)
+
+micro 微
+microscope 顯微鏡
+tele scope 望遠鏡
+macro 巨 (比原子(atom)大)
+atomic bomb 原子彈
+
+batch computation (批次運算)
+ 
+140.130.1.* (校主幹)
+0 ~ 255 == 2**8
+
+inter-net (網際網路, inter+network) == inter-national (國際)
+protocol (協定)
+tcp/ip == transmision control protocol/internet protocol
+IPv4 version 4 IP 4 個區段, 用 . 隔開
+IPv6 version 6 IP 八個區段, 用 : 隔開
+version 版本
+edition 版本
+transmit 傳輸
+control 控制
+data 資料
+port 埠號

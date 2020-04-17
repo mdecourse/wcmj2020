@@ -358,3 +358,13 @@ WantedBy=multi-user.target</pre>
 <p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/IOauashmKho" width="560"></iframe></p>
 <h4>利用 git 指令建立 cmsimde 網站</h4>
 <p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/NJTQulLMXnU" width="560"></iframe></p>
+<h2>W8</h2>
+<p>start.bat</p>
+<p>加入</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">REM for putty
+set GIT_HOME=%CDisk%:\portablegit\bin\
+set GIT_SSH=%Disk%:\putty\plink.exe</pre>
+<p>下載 y:\putty\plink</p>
+<p>修改倉儲 push 的連線方式, 由 https 改為 ssh<br/>將要使用 ssh 連線的倉儲 .git 中的 config 檔案中的 url 設定改為 ssh 連線格式, 例如:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">url = git@github.com:mdecourse/cad2019.git</pre>
+<p>其中 mdecourse 為登入 github 的使用者帳號, cad2019 為倉儲名稱.</p>

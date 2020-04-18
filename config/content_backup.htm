@@ -102,6 +102,17 @@ int min(int n1, int n2) {
 <p>for.py</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">for i in range(10):
 	print("使用 Python")</pre>
+<p>square_root.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># Python Program to calculate the square root
+
+# Note: change this value for a different result
+num = 8 
+
+# To take the input from the user
+#num = float(input('Enter a number: '))
+
+num_sqrt = num ** 0.5
+print('The square root of %0.3f is %0.3f'%(num ,num_sqrt))</pre>
 <p></p><h1>分組</h1>
 <h4>亂數分組:</h4>
 <p><a href="https://mde.tw/wcmj2020/downloads/2020spring_wcmj_1a_list.txt">https://mde.tw/wcmj2020/downloads/2020spring_wcmj_1a_list.txt</a> was taken from <a href="https://osa.nfu.edu.tw/">https://osa.nfu.edu.tw/</a> on Feb. 19, 2020.</p>
@@ -414,15 +425,13 @@ WantedBy=multi-user.target</pre><h2>分組結果</h2>
 <p><span>Login to your gm email account and download<span> </span><a href="https://drive.google.com/file/d/1vnkDLW1cg8hKEMUdjDstvWqiS4R1n3IC/view?usp=sharing">GithubPrimer.pdf</a></span></p>
 <p><span>Login to your gm email account and download<span> </span><a href="https://drive.google.com/file/d/18MiM_d95ustohAqoUfx-gc-2dUE9Av0n/view?usp=sharing">ConflictsGUIToolAdvGit.pdf</a></span></p><h2>倉儲與網站</h2>
 <ol>
-<li>下載 <a href="https://drive.google.com/open?id=1SvMKQFViJ0mskt20UhSqkjzckB3noSJH">wcmj2020_tool.7z</a></li>
-<li>建立 Github 倉儲</li>
-<li>git clone 到近端</li>
+<li>請重新下載 <a href="https://drive.google.com/open?id=1xDTDfcHU18ipqZNbOufMkSZqibqNeL2T">wcmj2020_tool.7z</a>, 檔案大小為 435 MB, 解開壓縮後為 1.8 GB (其中包括 Mypaint, Dia 與 OBS 等).</li>
+<li>登入 github.com 建立 Github 倉儲, 直接新增 README.md 檔案.</li>
+<li>將所建立的倉儲 git clone 到近端.</li>
 <li>git submodule add <a href="https://github.com/mdecourse/cmsimde.git">https://github.com/mdecourse/cmsimde.git</a> cmsimde</li>
 <li>在近端維護動態網站, 轉為靜態後 git add commit push</li>
 </ol>
-<p>Git </p>
-<p></p>
-<h2>繪圖</h2>
+<p>以下請各學員分別利用 ShareX 與 OBS 拍攝建立與維護個人倉儲與網站的影片, 完成後將影片 embed 入個人網站的 W8 頁面中.</p><h2>繪圖</h2>
 <p><a href="https://github.com/mypaint/mypaint">https://github.com/mypaint/mypaint</a></p>
 <p><a href="https://github.com/mypaint/mypaint/wiki/v1.2-User-Manual">https://github.com/mypaint/mypaint/wiki/v1.2-User-Manual</a> </p>
 <p><a href="/downloads/MyPaint筆刷說明.pdf">Mypaint筆刷說明.pdf</a></p>
@@ -449,12 +458,5 @@ WantedBy=multi-user.target</pre><h2>分組結果</h2>
 <h4>利用 git 指令建立 cmsimde 網站</h4>
 <p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/NJTQulLMXnU" width="560"></iframe></p>
 <h2>W8</h2>
-<p>start.bat</p>
-<p>加入</p>
-<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">REM for putty
-set GIT_HOME=%CDisk%:\portablegit\bin\
-set GIT_SSH=%Disk%:\putty\plink.exe</pre>
-<p>下載 y:\putty\plink</p>
-<p>修改倉儲 push 的連線方式, 由 https 改為 ssh<br/>將要使用 ssh 連線的倉儲 .git 中的 config 檔案中的 url 設定改為 ssh 連線格式, 例如:</p>
-<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">url = git@github.com:mdecourse/cad2019.git</pre>
-<p>其中 mdecourse 為登入 github 的使用者帳號, cad2019 為倉儲名稱.</p>
+<p></p>
+<p></p>

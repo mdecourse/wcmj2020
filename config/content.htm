@@ -26,11 +26,11 @@
 <p>編寫程式語言是工程師與電腦溝通的途徑之一, 工程師編寫計算機程式在電腦上執行, 可以透過電腦強大與重複的運算能力來解決問題.</p>
 <p>CMSiMDE 就是工程師希望將各種與產品開發的過程資料, 存放在網站上, 除了可用於工程師之間的溝通外, 還能夠將產品開發的細節, 或者特定工具的使用詳細記錄, 以作為往後的參考.</p>
 <h4>如何使用 CMSiMDE</h4>
-<p>以子模組的方式使用 CMSiMDE</p>
+<p>(1) 以子模組的方式使用 CMSiMDE</p>
 <p>將 Github 倉儲 git clone 到近端工作區之後, 可以利用 git submodule add 指令將遠端倉儲中的 CMSiMDE 程式碼納為倉儲中的 cmsimde 子目錄, 並且保持與遠端原始碼的版次關聯 (也就是能夠指定採用遠端特定版本的 CMSiMDE 程式碼).</p>
 <p style="padding-left: 30px;">好處: 子模組可以與遠端官方的倉儲保持關聯, 一旦 CMSiMDE 更新版本, 使用者可以利用 git pull 直接拉下遠端 CMSiMDE 的最新程式碼.</p>
 <p style="padding-left: 30px;">壞處: 使用者若要 git clone 遠端的倉儲至近端, 需要加上 --recurse-submodules 選項</p>
-<p>不以子模組的方式使用 CMSiMDE</p>
+<p>(2) 不以子模組的方式使用 CMSiMDE</p>
 <p>假如不需要保持與遠端 CMSiMDE 倉儲特定版次的關聯性, 可以直接將 CMSiMDE 倉儲中的檔案, 直接放入 cmsimde 目錄, 並將其中 up_dir 的內容複製到希望建立網頁的倉儲主目錄中即可.</p>
 <p style="padding-left: 30px;">好處: 使用者可以直接使用 git clone 指令, 拉下遠端倉儲的所有資料.</p>
 <p style="padding-left: 30px;">壞處: 失去與遠端 CMSiMDE 倉儲的關聯, 假如要使用最新改版後的 CMSiMDE 原始碼, 必須另外 git clone 然後再取代倉儲中 cmsimde 的所有檔案.</p>
@@ -113,7 +113,14 @@ num = 8
 
 num_sqrt = num ** 0.5
 print('The square root of %0.3f is %0.3f'%(num ,num_sqrt))</pre>
-<p></p><h1>分組</h1>
+<p></p><h1>電腦與網路</h1>
+<p>由於電腦輔助設計室中的電腦若採 IPv4 協定上網, 必須透過 NAT (Network Address Translation) 才能連結到外部網際網路. 此舉將限制各電腦能夠聯外的網路頻寬, 因此平常上課將會直接將網路以 IPv6 對外連線, 可以直接使用 Google 的各種服務.</p>
+<p>若需要連接至目前只支援 IPv4 協定連線的網站或服務, 則必須透過雙網路協定支援的代理主機, 才能完成連線, 其中包括 http, https, git, pip, sftp 等網路服務.</p>
+<p><a href="/downloads/pdf/Introduction_ to_computers.pdf">Introduction_ to_computers.pdf</a></p>
+<p><a href="/downloads/pdf/intro_to_computers.pdf">intro_to_computers.pdf</a></p>
+<p><a href="/downloads/pdf/introduction_Computer_Networking.pdf">introduction_Computer_Networking.pdf</a></p>
+<p><a href="/downloads/pdf/ComputerNetworks.pdf">An Introduction to computer networks.pdf</a></p>
+<p><a href="/downloads/pdf/data_communication_computer_network_tutorial.pdf">data_communication_computer_network_tutorial.pdf</a></p><h1>分組</h1>
 <h4>亂數分組:</h4>
 <p><a href="https://mde.tw/wcmj2020/downloads/2020spring_wcmj_1a_list.txt">https://mde.tw/wcmj2020/downloads/2020spring_wcmj_1a_list.txt</a> was taken from <a href="https://osa.nfu.edu.tw/">https://osa.nfu.edu.tw/</a> on Feb. 19, 2020.</p>
 <p>The most updated list: <a href="http://s1.mde.nfu.edu.tw:8000/?semester=1082&amp;courseno=2418">http://s1.mde.nfu.edu.tw:8000/?semester=1082&amp;courseno=2418</a> </p>

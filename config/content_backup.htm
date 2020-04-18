@@ -39,10 +39,70 @@
 <p>為了讓工程師可以在不同的 Windows 10 64 位元電腦上管理 CMSiMDE 網際內容管理系統, 因此需要 Python 解譯環境以及一個文字檔案的編輯器.</p>
 <p>這裡所安裝的 Python 解譯器選擇由 C 所編寫的 CPython, 可以從 <a href="https://www.python.org/">https://www.python.org/</a>  下載安裝. 但是在此我們要將 Python 解譯系統配置在 USB 隨身碟上, 使用者可以隨身攜帶, 一旦配置完成後, 可以在任何一台 Windows 10 64 位元的筆電或電腦上執行 Python 或 C 程式.</p>
 <p>可攜 Python 程式環境的建立步驟:</p>
+<p style="padding-left: 30px;">安裝 Python 套件時, 不要安裝 pip, 之後將 Python38 目錄複製到 data 目錄中, 然後建立 start.bat 指定使用可攜系統中的 Python, 之後再利用 g<a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;ved=2ahUKEwivpbG6gfHoAhURrZQKHUT8ARcQFjAAegQIAhAB&amp;url=https%3A%2F%2Fbootstrap.pypa.io%2Fget-pip.py&amp;usg=AOvVaw0zKVO_zW0nkF7s0zdjWFNj">et-pip.py,</a> 以命令列中的 python get-pip.py 安裝 pip.</p>
+<p>可攜 Tiny C 程式環境的建立步驟:</p>
+<p style="padding-left: 30px;">從 <a href="https://bellard.org/tcc/">https://bellard.org/tcc/</a> 下載 Tiny C, 將 tcc 解開壓縮後放到 data 目錄中. 然後修改 wscite 目錄中的 cpp.properties, 使用 Tiny C 類解譯 .c 程式.</p>
 <p>選用的文字編輯器: <a href="https://www.scintilla.org/SciTE.html">https://www.scintilla.org/SciTE.html</a></p>
-<p>初步建立完成的可攜程式環境:</p>
-<p style="padding-left: 30px;">下載 <a href="https://drive.google.com/open?id=1SvMKQFViJ0mskt20UhSqkjzckB3noSJH">wcm2020_w2.7z</a></p><h3>簡單的 C 程式</h3>
-<p>前面所打造的可攜 Python 程式環境, 包括 SciTE 文字編輯器, 只要再加上 <a href="https://bellard.org/tcc/">https://bellard.org/tcc/</a>, 可將此一可攜環境設置成能夠編譯與類解譯 ANSI C 程式的環境</p><h3>簡單的 Python 程式</h3><h1>分組</h1>
+<p>建立完成的可攜程式環境:</p>
+<p style="padding-left: 30px;"><span style="text-decoration: line-through;">下載 <a href="https://drive.google.com/open?id=1SvMKQFViJ0mskt20UhSqkjzckB3noSJH">wcm2020_w2.7z (舊資料)</a></span></p>
+<p style="padding-left: 30px;">請重新下載 <a href="https://drive.google.com/open?id=1xDTDfcHU18ipqZNbOufMkSZqibqNeL2T">wcmj2020_tool.7z</a>, 檔案大小為 435 MB, 解開壓縮後為 1.8 GB (其中包括 Mypaint, Dia 與 OBS 等)</p>
+<p style="padding-left: 30px;">將 wcmj2020_tool.7z 解壓縮到隨身碟或電腦硬碟中, 將 home 與 home_ipv6 目錄中的 .gitconfig user.name 與 user.email 改為自己的 Github 帳號與 email 後, 利用 start.bat 啟動可攜系統, 利用 stop.bat 關閉可攜系統.</p><h3>簡單的 C 程式</h3>
+<p>前面所打造的可攜 Python 程式環境, 包括 SciTE 文字編輯器, 只要再加上 <a href="https://bellard.org/tcc/">https://bellard.org/tcc/</a>, 可將此一可攜環境設置成能夠編譯與類解譯 ANSI C 程式的環境</p>
+<p>helloworld.c</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
+
+int main() {
+	printf("hello world\n");
+	return 'c';
+}</pre>
+<p>max.c</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int max(int,int);
+int min(int,int);
+
+int main() {
+
+    int i,numbers_len;
+
+    printf("How many numbers? ");
+    scanf("%d",&amp;numbers_len);
+
+    //int numbers[numbers_len]; //in this context this two lines are equivalent
+    int *numbers = (int*)malloc(numbers_len*sizeof(int));
+
+    for (i=0;i&lt;numbers_len;i++) {
+        printf("N[%d] = ",i);
+        scanf("%d",numbers+i);
+        /* scanf("%d",&amp;numbers[i]); */
+    }
+
+    int big = *numbers;
+    int small = numbers[0];
+    for (i=1;i&lt;numbers_len;i++) {
+        big = max(big,*(numbers+i));
+        small = min(small,numbers[i]);
+    }
+
+    printf("The small number is %d\n",small);
+    printf("The big number is %d\n",big);
+}
+
+int max(int n1, int n2) {
+    // return the biggest number between n1 and n2
+    return n1&gt;n2?n1:n2;
+}
+
+int min(int n1, int n2) {
+    // return the smallest number between n1 and n2
+    return n1&lt;n2?n1:n2;
+}</pre>
+<p></p><h3>簡單的 Python 程式</h3>
+<p>for.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">for i in range(10):
+	print("使用 Python")</pre>
+<p></p><h1>分組</h1>
 <h4>亂數分組:</h4>
 <p><a href="https://mde.tw/wcmj2020/downloads/2020spring_wcmj_1a_list.txt">https://mde.tw/wcmj2020/downloads/2020spring_wcmj_1a_list.txt</a> was taken from <a href="https://osa.nfu.edu.tw/">https://osa.nfu.edu.tw/</a> on Feb. 19, 2020.</p>
 <p>The most updated list: <a href="http://s1.mde.nfu.edu.tw:8000/?semester=1082&amp;courseno=2418">http://s1.mde.nfu.edu.tw:8000/?semester=1082&amp;courseno=2418</a> </p>
@@ -335,8 +395,8 @@ ExecStart=/usr/local/bin/uwsgi --emperor /home/kmol2019/uwsgi_ini
 
 [Install]
 WantedBy=multi-user.target</pre><h2>分組結果</h2>
-<p>==============================<br/>group 1 <br/>Repository: <a href="https://github.com/50833110/wcmj2020">50833110</a> | Site: <a href="https://50833110.github.io/wcmj2020">50833110</a><br/>Repository: <a href="https://github.com/50833112/wcmj2020">50833112</a> | Site: <a href="https://50833112.github.io/wcmj2020">50833112</a><br/>Repository: <a href="https://github.com/50833115/wcmj2020">50833115</a> | Site: <a href="https://50833115.github.io/wcmj2020">50833115</a><br/>Repository: <a href="https://github.com/50833123/wcmj2020">50833123</a> | Site: <a href="https://50833123.github.io/wcmj2020">50833123</a><br/>Repository: <a href="https://github.com/50833127/wcmj2020">50833127</a> | Site: <a href="https://50833127.github.io/wcmj2020">50833127</a><br/>Repository: <a href="https://github.com/50833128/wcmj2020">50833128</a> | Site: <a href="https://50833128.github.io/wcmj2020">50833128</a><br/>Repository: <a href="https://github.com/50833129/wcmj2020">50833129</a> | Site: <a href="https://50833129.github.io/wcmj2020">50833129</a><br/>Repository: <a href="https://github.com/50833131/wcmj2020">50833131</a> | Site: <a href="https://50833131.github.io/wcmj2020">50833131</a><br/>Repository: <a href="https://github.com/50833133/wcmj2020">50833133</a> | Site: <a href="https://50833133.github.io/wcmj2020">50833133</a><br/>Repository: <a href="https://github.com/50833138/wcmj2020">50833138</a> | Site: <a href="https://50833138.github.io/wcmj2020">50833138</a><br/> ==============================<br/>group 2 <br/>Repository: <a href="https://github.com/50833101/wcmj2020">50833101</a> | Site: <a href="https://50833101.github.io/wcmj2020">50833101</a><br/>Repository: <a href="https://github.com/50833107/wcmj2020">50833107</a> | Site: <a href="https://50833107.github.io/wcmj2020">50833107</a><br/>Repository: <a href="https://github.com/50833108/wcmj2020">50833108</a> | Site: <a href="https://50833108.github.io/wcmj2020">50833108</a><br/>Repository: <a href="https://github.com/50833111/wcmj2020">50833111</a> | Site: <a href="https://50833111.github.io/wcmj2020">50833111</a><br/>Repository: <a href="https://github.com/50833117/wcmj2020">50833117</a> | Site: <a href="https://50833117.github.io/wcmj2020">50833117</a><br/>Repository: <a href="https://github.com/50833119/wcmj2020">50833119</a> | Site: <a href="https://50833119.github.io/wcmj2020">50833119</a><br/>Repository: <a href="https://github.com/50833122/wcmj2020">50833122</a> | Site: <a href="https://50833122.github.io/wcmj2020">50833122</a><br>Repository: <a href="https://github.com/50833126/wcmj2020">50833126</a> | Site: <a href="https://50833126.github.io/wcmj2020">50833126</a><br>Repository: <a href="https://github.com/50833130/wcmj2020">50833130</a> | Site: <a href="https://50833130.github.io/wcmj2020">50833130</a><br/>Repository: <a href="https://github.com/50833134/wcmj2020">50833134</a> | Site: <a href="https://50833134.github.io/wcmj2020">50833134</a><br/> ==============================<br/>group 3 <br/>Repository: <a href="https://github.com/50833104/wcmj2020">50833104</a> | Site: <a href="https://50833104.github.io/wcmj2020">50833104</a><br/>Repository: <a href="https://github.com/50833106/wcmj2020">50833106</a> | Site: <a href="https://50833106.github.io/wcmj2020">50833106</a><br/>Repository: <a href="https://github.com/50833113/wcmj2020">50833113</a> | Site: <a href="https://50833113.github.io/wcmj2020">50833113</a><br/>Repository: <a href="https://github.com/50833114/wcmj2020">50833114</a> | Site: <a href="https://50833114.github.io/wcmj2020">50833114</a><br/>Repository: <a href="https://github.com/50833116/wcmj2020">50833116</a> | Site: <a href="https://50833116.github.io/wcmj2020">50833116</a><br/>Repository: <a href="https://github.com/50833118/wcmj2020">50833118</a> | Site: <a href="https://50833118.github.io/wcmj2020">50833118</a><br/>Repository: <a href="https://github.com/50833120/wcmj2020">50833120</a> | Site: <a href="https://50833120.github.io/wcmj2020">50833120</a><br/>Repository: <a href="https://github.com/50833125/wcmj2020">50833125</a> | Site: <a href="https://50833125.github.io/wcmj2020">50833125</a><br/>Repository: <a href="https://github.com/50833140/wcmj2020">50833140</a> | Site: <a href="https://50833140.github.io/wcmj2020">50833140</a><br/>Repository: <a href="https://github.com/50833141/wcmj2020">50833141</a> | Site: <a href="https://50833141.github.io/wcmj2020">50833141</a><br/> ==============================<br/>group 4 <br/>Repository: <a href="https://github.com/50833102/wcmj2020">50833102</a> | Site: <a href="https://50833102.github.io/wcmj2020">50833102</a><br/>Repository: <a href="https://github.com/50833103/wcmj2020">50833103</a> | Site: <a href="https://50833103.github.io/wcmj2020">50833103</a><br/>Repository: <a href="https://github.com/50833105/wcmj2020">50833105</a> | Site: <a href="https://50833105.github.io/wcmj2020">50833105</a><br/>Repository: <a href="https://github.com/50833109/wcmj2020">50833109</a> | Site: <a href="https://50833109.github.io/wcmj2020">50833109</a><br/>Repository: <a href="https://github.com/50833121/wcmj2020">50833121</a> | Site: <a href="https://50833121.github.io/wcmj2020">50833121</a><br/>Repository: <a href="https://github.com/50833124/wcmj2020">50833124</a> | Site: <a href="https://50833124.github.io/wcmj2020">50833124</a><br/>Repository: <a href="https://github.com/50833135/wcmj2020">50833135</a> | Site: <a href="https://50833135.github.io/wcmj2020">50833135</a><br/>Repository: <a href="https://github.com/50833136/wcmj2020">50833136</a> | Site: <a href="https://50833136.github.io/wcmj2020">50833136</a><br/>Repository: <a href="https://github.com/50833137/wcmj2020">50833137</a> | Site: <a href="https://50833137.github.io/wcmj2020">50833137</a><br/>Repository: <a href="https://github.com/50833139/wcmj2020">50833139</a> | Site: <a href="https://50833139.github.io/wcmj2020">50833139</a></br></br></p>
-<h1>Topics</h1>
+<p>==============================<br/>group 1 <br/>Repository: <a href="https://github.com/50833110/wcmj2020">50833110</a> | Site: <a href="https://50833110.github.io/wcmj2020">50833110</a><br/>Repository: <a href="https://github.com/50833112/wcmj2020">50833112</a> | Site: <a href="https://50833112.github.io/wcmj2020">50833112</a><br/>Repository: <a href="https://github.com/50833115/wcmj2020">50833115</a> | Site: <a href="https://50833115.github.io/wcmj2020">50833115</a><br/>Repository: <a href="https://github.com/50833123/wcmj2020">50833123</a> | Site: <a href="https://50833123.github.io/wcmj2020">50833123</a><br/>Repository: <a href="https://github.com/50833127/wcmj2020">50833127</a> | Site: <a href="https://50833127.github.io/wcmj2020">50833127</a><br/>Repository: <a href="https://github.com/50833128/wcmj2020">50833128</a> | Site: <a href="https://50833128.github.io/wcmj2020">50833128</a><br/>Repository: <a href="https://github.com/50833129/wcmj2020">50833129</a> | Site: <a href="https://50833129.github.io/wcmj2020">50833129</a><br/>Repository: <a href="https://github.com/50833131/wcmj2020">50833131</a> | Site: <a href="https://50833131.github.io/wcmj2020">50833131</a><br/>Repository: <a href="https://github.com/50833133/wcmj2020">50833133</a> | Site: <a href="https://50833133.github.io/wcmj2020">50833133</a><br/>Repository: <a href="https://github.com/50833138/wcmj2020">50833138</a> | Site: <a href="https://50833138.github.io/wcmj2020">50833138</a><br/> ==============================<br/>group 2 <br/>Repository: <a href="https://github.com/50833101/wcmj2020">50833101</a> | Site: <a href="https://50833101.github.io/wcmj2020">50833101</a><br/>Repository: <a href="https://github.com/50833107/wcmj2020">50833107</a> | Site: <a href="https://50833107.github.io/wcmj2020">50833107</a><br/>Repository: <a href="https://github.com/50833108/wcmj2020">50833108</a> | Site: <a href="https://50833108.github.io/wcmj2020">50833108</a><br/>Repository: <a href="https://github.com/50833111/wcmj2020">50833111</a> | Site: <a href="https://50833111.github.io/wcmj2020">50833111</a><br/>Repository: <a href="https://github.com/50833117/wcmj2020">50833117</a> | Site: <a href="https://50833117.github.io/wcmj2020">50833117</a><br/>Repository: <a href="https://github.com/50833119/wcmj2020">50833119</a> | Site: <a href="https://50833119.github.io/wcmj2020">50833119</a><br/>Repository: <a href="https://github.com/50833122/wcmj2020">50833122</a> | Site: <a href="https://50833122.github.io/wcmj2020">50833122</a><br/>Repository: <a href="https://github.com/50833126/wcmj2020">50833126</a> | Site: <a href="https://50833126.github.io/wcmj2020">50833126</a><br/>Repository: <a href="https://github.com/50833130/wcmj2020">50833130</a> | Site: <a href="https://50833130.github.io/wcmj2020">50833130</a><br/>Repository: <a href="https://github.com/50833134/wcmj2020">50833134</a> | Site: <a href="https://50833134.github.io/wcmj2020">50833134</a><br/> ==============================<br/>group 3 <br/>Repository: <a href="https://github.com/50833104/wcmj2020">50833104</a> | Site: <a href="https://50833104.github.io/wcmj2020">50833104</a><br/>Repository: <a href="https://github.com/50833106/wcmj2020">50833106</a> | Site: <a href="https://50833106.github.io/wcmj2020">50833106</a><br/>Repository: <a href="https://github.com/50833113/wcmj2020">50833113</a> | Site: <a href="https://50833113.github.io/wcmj2020">50833113</a><br/>Repository: <a href="https://github.com/50833114/wcmj2020">50833114</a> | Site: <a href="https://50833114.github.io/wcmj2020">50833114</a><br/>Repository: <a href="https://github.com/50833116/wcmj2020">50833116</a> | Site: <a href="https://50833116.github.io/wcmj2020">50833116</a><br/>Repository: <a href="https://github.com/50833118/wcmj2020">50833118</a> | Site: <a href="https://50833118.github.io/wcmj2020">50833118</a><br/>Repository: <a href="https://github.com/50833120/wcmj2020">50833120</a> | Site: <a href="https://50833120.github.io/wcmj2020">50833120</a><br/>Repository: <a href="https://github.com/50833125/wcmj2020">50833125</a> | Site: <a href="https://50833125.github.io/wcmj2020">50833125</a><br/>Repository: <a href="https://github.com/50833140/wcmj2020">50833140</a> | Site: <a href="https://50833140.github.io/wcmj2020">50833140</a><br/>Repository: <a href="https://github.com/50833141/wcmj2020">50833141</a> | Site: <a href="https://50833141.github.io/wcmj2020">50833141</a><br/> ==============================<br/>group 4 <br/>Repository: <a href="https://github.com/50833102/wcmj2020">50833102</a> | Site: <a href="https://50833102.github.io/wcmj2020">50833102</a><br/>Repository: <a href="https://github.com/50833103/wcmj2020">50833103</a> | Site: <a href="https://50833103.github.io/wcmj2020">50833103</a><br/>Repository: <a href="https://github.com/50833105/wcmj2020">50833105</a> | Site: <a href="https://50833105.github.io/wcmj2020">50833105</a><br/>Repository: <a href="https://github.com/50833109/wcmj2020">50833109</a> | Site: <a href="https://50833109.github.io/wcmj2020">50833109</a><br/>Repository: <a href="https://github.com/50833121/wcmj2020">50833121</a> | Site: <a href="https://50833121.github.io/wcmj2020">50833121</a><br/>Repository: <a href="https://github.com/50833124/wcmj2020">50833124</a> | Site: <a href="https://50833124.github.io/wcmj2020">50833124</a><br/>Repository: <a href="https://github.com/50833135/wcmj2020">50833135</a> | Site: <a href="https://50833135.github.io/wcmj2020">50833135</a><br/>Repository: <a href="https://github.com/50833136/wcmj2020">50833136</a> | Site: <a href="https://50833136.github.io/wcmj2020">50833136</a><br/>Repository: <a href="https://github.com/50833137/wcmj2020">50833137</a> | Site: <a href="https://50833137.github.io/wcmj2020">50833137</a><br/>Repository: <a href="https://github.com/50833139/wcmj2020">50833139</a> | Site: <a href="https://50833139.github.io/wcmj2020">50833139</a></p>
+<h1>主題</h1>
 <h4>Google Blogger</h4>
 <p>Login to your gm email account and download <a href="https://drive.google.com/file/d/12Ypf02FVP9l7a9ufZfhRicN-rzCKkAf5/view?usp=sharing">2010_BeginningGoogleBlogger.pdf</a></p>
 <h4>WCM</h4>
@@ -352,8 +412,7 @@ WantedBy=multi-user.target</pre><h2>分組結果</h2>
 <p style="padding-left: 30px;"><span>Commits and remote git.</span></p>
 <h4><span>Github</span></h4>
 <p><span>Login to your gm email account and download<span> </span><a href="https://drive.google.com/file/d/1vnkDLW1cg8hKEMUdjDstvWqiS4R1n3IC/view?usp=sharing">GithubPrimer.pdf</a></span></p>
-<p><span>Login to your gm email account and download<span> </span><a href="https://drive.google.com/file/d/18MiM_d95ustohAqoUfx-gc-2dUE9Av0n/view?usp=sharing">ConflictsGUIToolAdvGit.pdf</a></span></p>
-<h2>倉儲與網站</h2>
+<p><span>Login to your gm email account and download<span> </span><a href="https://drive.google.com/file/d/18MiM_d95ustohAqoUfx-gc-2dUE9Av0n/view?usp=sharing">ConflictsGUIToolAdvGit.pdf</a></span></p><h2>倉儲與網站</h2>
 <ol>
 <li>下載 <a href="https://drive.google.com/open?id=1SvMKQFViJ0mskt20UhSqkjzckB3noSJH">wcmj2020_tool.7z</a></li>
 <li>建立 Github 倉儲</li>
@@ -363,7 +422,11 @@ WantedBy=multi-user.target</pre><h2>分組結果</h2>
 </ol>
 <p>Git </p>
 <p></p>
-<h2>W6</h2>
+<h2>繪圖</h2>
+<p><a href="https://github.com/mypaint/mypaint">https://github.com/mypaint/mypaint</a></p>
+<p><a href="https://github.com/mypaint/mypaint/wiki/v1.2-User-Manual">https://github.com/mypaint/mypaint/wiki/v1.2-User-Manual</a> </p>
+<p><a href="/downloads/MyPaint筆刷說明.pdf">Mypaint筆刷說明.pdf</a></p>
+<p></p><h2>W6</h2>
 <h4>Online education</h4>
 <p>線上直播: Youtube + Portable OBS</p>
 <p>線上開會: <a href="https://meet.google.com">https://meet.google.com</a> </p>
@@ -380,8 +443,7 @@ WantedBy=multi-user.target</pre><h2>分組結果</h2>
 <p style="padding-left: 30px;">git clone --recurse-submodules 倉儲_url.git</p>
 <p>例如: git clone --recurse-submodules https://github.com/mdecourse/wcmj2020.git</p>
 <p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/5qTYqHULS7A" width="560"></iframe></p>
-<p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/xYZLwLaUG6U" width="560"></iframe></p>
-<h2>W7</h2>
+<p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/xYZLwLaUG6U" width="560"></iframe></p><h2>W7</h2>
 <h4>下載可攜程式系統</h4>
 <p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/IOauashmKho" width="560"></iframe></p>
 <h4>利用 git 指令建立 cmsimde 網站</h4>

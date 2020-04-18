@@ -39,10 +39,81 @@
 <p>為了讓工程師可以在不同的 Windows 10 64 位元電腦上管理 CMSiMDE 網際內容管理系統, 因此需要 Python 解譯環境以及一個文字檔案的編輯器.</p>
 <p>這裡所安裝的 Python 解譯器選擇由 C 所編寫的 CPython, 可以從 <a href="https://www.python.org/">https://www.python.org/</a>  下載安裝. 但是在此我們要將 Python 解譯系統配置在 USB 隨身碟上, 使用者可以隨身攜帶, 一旦配置完成後, 可以在任何一台 Windows 10 64 位元的筆電或電腦上執行 Python 或 C 程式.</p>
 <p>可攜 Python 程式環境的建立步驟:</p>
+<p style="padding-left: 30px;">安裝 Python 套件時, 不要安裝 pip, 之後將 Python38 目錄複製到 data 目錄中, 然後建立 start.bat 指定使用可攜系統中的 Python, 之後再利用 g<a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;ved=2ahUKEwivpbG6gfHoAhURrZQKHUT8ARcQFjAAegQIAhAB&amp;url=https%3A%2F%2Fbootstrap.pypa.io%2Fget-pip.py&amp;usg=AOvVaw0zKVO_zW0nkF7s0zdjWFNj">et-pip.py,</a> 以命令列中的 python get-pip.py 安裝 pip.</p>
+<p>可攜 Tiny C 程式環境的建立步驟:</p>
+<p style="padding-left: 30px;">從 <a href="https://bellard.org/tcc/">https://bellard.org/tcc/</a> 下載 Tiny C, 將 tcc 解開壓縮後放到 data 目錄中. 然後修改 wscite 目錄中的 cpp.properties, 使用 Tiny C 類解譯 .c 程式.</p>
 <p>選用的文字編輯器: <a href="https://www.scintilla.org/SciTE.html">https://www.scintilla.org/SciTE.html</a></p>
-<p>初步建立完成的可攜程式環境:</p>
-<p style="padding-left: 30px;">下載 <a href="https://drive.google.com/open?id=1SvMKQFViJ0mskt20UhSqkjzckB3noSJH">wcm2020_w2.7z</a></p><h3>簡單的 C 程式</h3>
-<p>前面所打造的可攜 Python 程式環境, 包括 SciTE 文字編輯器, 只要再加上 <a href="https://bellard.org/tcc/">https://bellard.org/tcc/</a>, 可將此一可攜環境設置成能夠編譯與類解譯 ANSI C 程式的環境</p><h3>簡單的 Python 程式</h3><h1>分組</h1>
+<p>建立完成的可攜程式環境:</p>
+<p style="padding-left: 30px;"><span style="text-decoration: line-through;">下載 <a href="https://drive.google.com/open?id=1SvMKQFViJ0mskt20UhSqkjzckB3noSJH">wcm2020_w2.7z (舊資料)</a></span></p>
+<p style="padding-left: 30px;">請重新下載 <a href="https://drive.google.com/open?id=1xDTDfcHU18ipqZNbOufMkSZqibqNeL2T">wcmj2020_tool.7z</a>, 檔案大小為 435 MB, 解開壓縮後為 1.8 GB (其中包括 Mypaint, Dia 與 OBS 等)</p>
+<p style="padding-left: 30px;">將 wcmj2020_tool.7z 解壓縮到隨身碟或電腦硬碟中, 將 home 與 home_ipv6 目錄中的 .gitconfig user.name 與 user.email 改為自己的 Github 帳號與 email 後, 利用 start.bat 啟動可攜系統, 利用 stop.bat 關閉可攜系統.</p><h3>簡單的 C 程式</h3>
+<p>前面所打造的可攜 Python 程式環境, 包括 SciTE 文字編輯器, 只要再加上 <a href="https://bellard.org/tcc/">https://bellard.org/tcc/</a>, 可將此一可攜環境設置成能夠編譯與類解譯 ANSI C 程式的環境</p>
+<p>helloworld.c</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
+
+int main() {
+	printf("hello world\n");
+	return 'c';
+}</pre>
+<p>max.c</p>
+<pre class="brush:cpp;auto-links:false;toolbar:false" contenteditable="false">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int max(int,int);
+int min(int,int);
+
+int main() {
+
+    int i,numbers_len;
+
+    printf("How many numbers? ");
+    scanf("%d",&amp;numbers_len);
+
+    //int numbers[numbers_len]; //in this context this two lines are equivalent
+    int *numbers = (int*)malloc(numbers_len*sizeof(int));
+
+    for (i=0;i&lt;numbers_len;i++) {
+        printf("N[%d] = ",i);
+        scanf("%d",numbers+i);
+        /* scanf("%d",&amp;numbers[i]); */
+    }
+
+    int big = *numbers;
+    int small = numbers[0];
+    for (i=1;i&lt;numbers_len;i++) {
+        big = max(big,*(numbers+i));
+        small = min(small,numbers[i]);
+    }
+
+    printf("The small number is %d\n",small);
+    printf("The big number is %d\n",big);
+}
+
+int max(int n1, int n2) {
+    // return the biggest number between n1 and n2
+    return n1&gt;n2?n1:n2;
+}
+
+int min(int n1, int n2) {
+    // return the smallest number between n1 and n2
+    return n1&lt;n2?n1:n2;
+}</pre>
+<p></p><h3>簡單的 Python 程式</h3>
+<p>for.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">for i in range(10):
+	print("使用 Python")</pre>
+<p>square_root.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># Python Program to calculate the square root
+
+# Note: change this value for a different result
+num = 8 
+
+# To take the input from the user
+#num = float(input('Enter a number: '))
+
+num_sqrt = num ** 0.5
+print('The square root of %0.3f is %0.3f'%(num ,num_sqrt))</pre>
+<p></p><h1>分組</h1>
 <h4>亂數分組:</h4>
 <p><a href="https://mde.tw/wcmj2020/downloads/2020spring_wcmj_1a_list.txt">https://mde.tw/wcmj2020/downloads/2020spring_wcmj_1a_list.txt</a> was taken from <a href="https://osa.nfu.edu.tw/">https://osa.nfu.edu.tw/</a> on Feb. 19, 2020.</p>
 <p>The most updated list: <a href="http://s1.mde.nfu.edu.tw:8000/?semester=1082&amp;courseno=2418">http://s1.mde.nfu.edu.tw:8000/?semester=1082&amp;courseno=2418</a> </p>
@@ -362,7 +433,11 @@ WantedBy=multi-user.target</pre><h2>分組結果</h2>
 </ol>
 <p>Git </p>
 <p></p>
-<h2>W6</h2>
+<h2>繪圖</h2>
+<p><a href="https://github.com/mypaint/mypaint">https://github.com/mypaint/mypaint</a></p>
+<p><a href="https://github.com/mypaint/mypaint/wiki/v1.2-User-Manual">https://github.com/mypaint/mypaint/wiki/v1.2-User-Manual</a> </p>
+<p><a href="/downloads/MyPaint筆刷說明.pdf">Mypaint筆刷說明.pdf</a></p>
+<p></p><h2>W6</h2>
 <h4>Online education</h4>
 <p>線上直播: Youtube + Portable OBS</p>
 <p>線上開會: <a href="https://meet.google.com">https://meet.google.com</a> </p>
@@ -379,8 +454,7 @@ WantedBy=multi-user.target</pre><h2>分組結果</h2>
 <p style="padding-left: 30px;">git clone --recurse-submodules 倉儲_url.git</p>
 <p>例如: git clone --recurse-submodules https://github.com/mdecourse/wcmj2020.git</p>
 <p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/5qTYqHULS7A" width="560"></iframe></p>
-<p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/xYZLwLaUG6U" width="560"></iframe></p>
-<h2>W7</h2>
+<p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/xYZLwLaUG6U" width="560"></iframe></p><h2>W7</h2>
 <h4>下載可攜程式系統</h4>
 <p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/IOauashmKho" width="560"></iframe></p>
 <h4>利用 git 指令建立 cmsimde 網站</h4>

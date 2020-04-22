@@ -45,7 +45,7 @@
 <p>建立完成的可攜程式環境:</p>
 <p style="padding-left: 30px;"><span style="text-decoration: line-through;">下載 <a href="https://drive.google.com/open?id=1SvMKQFViJ0mskt20UhSqkjzckB3noSJH">wcm2020_w2.7z (舊資料)</a></span></p>
 <p style="padding-left: 30px;">請重新下載 <a href="https://drive.google.com/open?id=1xDTDfcHU18ipqZNbOufMkSZqibqNeL2T">wcmj2020_tool.7z</a>, 檔案大小為 435 MB, 解開壓縮後為 1.8 GB (其中包括 Mypaint, Dia 與 OBS 等)</p>
-<p style="padding-left: 30px;">將 wcmj2020_tool.7z 解壓縮到隨身碟或電腦硬碟中, 將 home 與 home_ipv6 目錄中的 .gitconfig user.name 與 user.email 改為自己的 Github 帳號與 email 後, 利用 start.bat 啟動可攜系統, 利用 stop.bat 關閉可攜系統.</p><h3>簡單的 C 程式</h3>
+<p style="padding-left: 30px;">將 wcmj2020_tool.7z 解壓縮到隨身碟或電腦硬碟中, 將 home 與 home_ipv6 目錄中的 .gitconfig user.name 與 user.email 改為自己的 Github 帳號與 email 後, 利用 start.bat 啟動可攜系統, 利用 stop.bat 關閉可攜系統.</p><h3>C 程式</h3>
 <p>前面所打造的可攜 Python 程式環境, 包括 SciTE 文字編輯器, 只要再加上 <a href="https://bellard.org/tcc/">https://bellard.org/tcc/</a>, 可將此一可攜環境設置成能夠編譯與類解譯 ANSI C 程式的環境</p>
 <p>C 程式語言教材:</p>
 <p style="padding-left: 30px;"><a href="/downloads/pdf/Programming-in-ANSI-C.pdf">Programming-in-ANSI-C.pdf</a></p>
@@ -100,7 +100,7 @@ int min(int n1, int n2) {
     // return the smallest number between n1 and n2
     return n1&lt;n2?n1:n2;
 }</pre>
-<p></p><h3>簡單的 Python 程式</h3>
+<p></p><h3>Python 程式</h3>
 <p>學習 Python3 的電子書: <span><a href="https://drive.google.com/file/d/17_LCSvwgtnIG8FnpezfUlEdbo3Y6G6CP/view?usp=sharing">2019_ABeginnersGuideToPython3Programming.pdf</a></span> (登入 @gm 帳號後下載)</p>
 <p>上述電子書作者認為目前 Python 計算機程式語言之所以眾所矚目的原因:</p>
 <p style="padding-left: 30px;">There is currently huge interest in the <a href="https://zh.wikipedia.org/wiki/Python">Python</a> programming language. This is driven by several factors; its use in schools with the <a href="https://zh.wikipedia.org/wiki/%E6%A0%91%E8%8E%93%E6%B4%BE">Raspberry Pi</a> platform, its ability to be used for <a href="https://zh.wikipedia.org/wiki/DevOps">DevOps</a> scripts, its use in <a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6">data science</a> and <a href="https://zh.wikipedia.org/wiki/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">machine learning</a> and of course the language itself.</p>
@@ -118,15 +118,15 @@ num = 8
 
 num_sqrt = num ** 0.5
 print('The square root of %0.3f is %0.3f'%(num ,num_sqrt))</pre>
-<p></p><h1>電腦與網路</h1>
+<p></p><h3>Lua 程式</h3>
+<p><iframe height="1000" src="/downloads/lua2.html" width="800"></iframe></p><h1>電腦與網路</h1>
 <p>由於電腦輔助設計室中的電腦若採 IPv4 協定上網, 必須透過 NAT (Network Address Translation) 才能連結到外部網際網路. 此舉將限制各電腦能夠聯外的網路頻寬, 因此平常上課將會直接將網路以 IPv6 對外連線, 可以直接使用 Google 的各種服務.</p>
 <p>若需要連接至目前只支援 IPv4 協定連線的網站或服務, 則必須透過雙網路協定支援的代理主機, 才能完成連線, 其中包括 http, https, git, pip, sftp 等網路服務.</p>
 <p><a href="/downloads/pdf/Introduction_ to_computers.pdf">Introduction_ to_computers.pdf</a></p>
 <p><a href="/downloads/pdf/intro_to_computers.pdf">intro_to_computers.pdf</a></p>
 <p><a href="/downloads/pdf/introduction_Computer_Networking.pdf">introduction_Computer_Networking.pdf</a></p>
 <p><a href="/downloads/pdf/ComputerNetworks.pdf">An Introduction to computer networks.pdf</a></p>
-<p><a href="/downloads/pdf/data_communication_computer_network_tutorial.pdf">data_communication_computer_network_tutorial.pdf</a></p>
-<h2>Python</h2>
+<p><a href="/downloads/pdf/data_communication_computer_network_tutorial.pdf">data_communication_computer_network_tutorial.pdf</a></p><h2>Python</h2>
 <p>課程評分程式</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">'''
 根據評分表單中的 自評分數, 互評得分, 教師評分, 計算學員課程成績
@@ -164,27 +164,25 @@ print(學員成績(80, 70, 60))
 print(學員成績(60, 70, 80))</pre>
 <p></p>
 <h4>Python 語法</h4>
-<p>
-<script src="/downloads/Brython-3.8.8/brython.js"></script>
-<script src="/downloads/Brython-3.8.8/brython_stdlib.js"></script>
+<script src="/static/brython.js"></script>
+<script src="/static/brython_stdlib.js"></script>
 <!-- for ggame -->
-<script src="/downloads/Brython-3.8.8/jquery-3.3.1.min.js"></script>
-<script src="/downloads/Brython-3.8.8/jquery-ui.1.12.1.min.js"></script>
-<script src="/downloads/Brython-3.8.8/pixi-3.0.5.min.js"></script>
+<script src="/static/jquery-3.3.1.min.js"></script>
+<script src="/static/jquery-ui.1.12.1.min.js"></script>
+<script src="/static/pixi-3.0.5.min.js"></script>
 <script src="/static/buzz-1.2.1.js"></script>
-<script src="/downloads/Brython-3.8.8/bs.js"></script>
+<script src="/static/bs.js"></script>
 <!-- Cango 程式庫 -->
-<script src="/downloads/Brython-3.8.8/Cango-13v08-min.js"></script>
-<script src="/downloads/Brython-3.8.8/CangoAxes-6v01-min.js"></script>
-<script src="/downloads/Brython-3.8.8/gearUtils-09.js"></script>
+<script src="/static/Cango-13v08-min.js"></script>
+<script src="/static/CangoAxes-4v01-min.js"></script>
+<script src="/static/gearUtils-05.js"></script>
 <!-- for Konva 程式庫 -->
-<script src="/downloads/Brython-3.8.8/konva.min.js"></script>
+<script src="/static/konva.min.js"></script>
 <script>
 window.onload=function(){
-brython({debug:1, pythonpath:['/downloads/Brython-3.8.8/']});
+brython({debug:1, pythonpath:['/static/']});
 }
 </script>
-</p>
 <p><!-- 導入 FileSaver 與 filereader --></p>
 <p>
 <script src="/static/ace/FileSaver.min.js" type="text/javascript"></script>

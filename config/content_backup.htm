@@ -2119,13 +2119,21 @@ WantedBy=multi-user.target</pre><h2>分組結果</h2>
 <li>git submodule add <a href="https://github.com/mdecourse/cmsimde.git">https://github.com/mdecourse/cmsimde.git</a> cmsimde</li>
 <li>在近端維護動態網站, 轉為靜態後 git add commit push</li>
 </ol>
-<p>以下請各學員分別利用 ShareX 與 OBS 拍攝建立與維護個人倉儲與網站的影片, 完成後將影片 embed 入個人網站的 W8 頁面中.</p><h2>繪圖</h2>
+<p>以下請各學員分別利用 ShareX 與 OBS 拍攝建立與維護個人倉儲與網站的影片, 完成後將影片 embed 入個人網站的 W8 頁面中.</p>
+<h3>以 SSH 維護倉儲</h3>
+<p>1. 下載 Putty 工具組</p>
+<p style="padding-left: 30px;"><span>從 </span><a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/" rel="nofollow">https://www.chiark.greenend.org.uk/~sgtatham/putty/</a><span><span> </span>下載一般版, 或從<span> </span></span><a href="http://jakub.kotrla.net/putty/" rel="nofollow">http://jakub.kotrla.net/putty/</a><span><span> </span>下載特殊的可攜版本.</span></p>
+<p><span>2. 利用 y:\portablegit\bin\sh.exe 進入 shell 命令環境後, 以 </span></p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false"> ssh-keygen -t rsa -b 4096 -C "使用者學號"</pre>
+<p style="padding-left: 30px;">在 /y/home/.ssh 目錄下建立 id_rsa 與 id_rsa.pub 等 private key 與 public key</p>
+<p style="padding-left: 30px;">之後以 SciTE 開啟 id_rsa.pub 後, 將此 public key 的內容, 以新增添加到 Github.com 帳號下 personal settings -&gt; SSH and GPG keys 頁面下.</p>
+<p>3. 接下來要利用 puttygen.exe 將 id_rsa 轉為 Putty 可以解讀的 .ppk 格式, 並修改隨身系統的啟動批次檔案, 指定利用 putty 目錄下的 plink 執行 git 指令的網路代理設定.</p><h2>繪圖</h2>
 <p><a href="https://github.com/mypaint/mypaint">https://github.com/mypaint/mypaint</a></p>
 <p><a href="https://github.com/mypaint/mypaint/wiki/v1.2-User-Manual">https://github.com/mypaint/mypaint/wiki/v1.2-User-Manual</a></p>
 <p><a href="/downloads/MyPaint筆刷說明.pdf">Mypaint筆刷說明.pdf</a></p>
 <p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/gblZFCPOazc" width="560"></iframe></p>
 <p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/4iigGPzdg7s" width="560"></iframe></p>
-<p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/9NDuiP17GnA" width="560"></iframe></p><h2>W6</h2>
+<p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/9NDuiP17GnA" width="560"></iframe></p><h2>W6-W9</h2>
 <h4>Online education</h4>
 <p>線上直播: Youtube + Portable OBS</p>
 <p>線上開會: <a href="https://meet.google.com">https://meet.google.com</a> </p>
@@ -2144,11 +2152,13 @@ WantedBy=multi-user.target</pre><h2>分組結果</h2>
 <h4>現場直播的 audio 錄音設定</h4>
 <p>在電腦輔助設計室進行直播時, 由於現場有擴音設備, 因此採用 OBS 串流至 Youtube 的最佳收音並非從 Webcam 的麥克風, 而是從擴音器以 audio outpu 連接到電腦的麥克風插槽, 然後將 OBS 的 audio 設定為從電腦的麥克風收音.</p>
 <p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/5qTYqHULS7A" width="560"></iframe></p>
-<p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/xYZLwLaUG6U" width="560"></iframe></p><h4>W7</h4>
+<p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/xYZLwLaUG6U" width="560"></iframe></p>
+<h4>W7</h4>
 <h4>下載可攜程式系統</h4>
 <p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/IOauashmKho" width="560"></iframe></p>
 <h4>利用 git 指令建立 cmsimde 網站</h4>
-<p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/NJTQulLMXnU" width="560"></iframe></p><h4>W8</h4>
+<p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/NJTQulLMXnU" width="560"></iframe></p>
+<h4>W8</h4>
 <p>請重新下載 <a href="https://drive.google.com/open?id=1xDTDfcHU18ipqZNbOufMkSZqibqNeL2T">wcmj2020_tool.7z</a>, 檔案大小為 435 MB, 解開壓縮後為 1.8 GB (其中包括 Mypaint, Dia 與 OBS 等).</p>
 <p>學會利用 ShareX 與 OBS 拍攝螢幕操作影片, 並將個人維護倉儲與網站的過程影片放入個人網站中.</p>
 <h4>W9</h4>

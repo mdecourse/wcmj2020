@@ -154,13 +154,19 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">以 SSH 維護倉儲 << <a href='以 SSH 維護倉儲.html'>Previous</a> <a href='W6-W9.html'>Next</a> >> W6-W9<br /><h1>繪圖</h1>
-<p><a href="https://github.com/mypaint/mypaint">https://github.com/mypaint/mypaint</a></p>
-<p><a href="https://github.com/mypaint/mypaint/wiki/v1.2-User-Manual">https://github.com/mypaint/mypaint/wiki/v1.2-User-Manual</a></p>
-<p><a href="./../downloads/MyPaint筆刷說明.pdf">Mypaint筆刷說明.pdf</a></p>
-<p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/gblZFCPOazc" width="560"></iframe></p>
-<p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/4iigGPzdg7s" width="560"></iframe></p>
-<p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/9NDuiP17GnA" width="560"></iframe></p><br />以 SSH 維護倉儲 << <a href='以 SSH 維護倉儲.html'>Previous</a> <a href='W6-W9.html'>Next</a> >> W6-W9</div>
+    <div id="tipue_search_content">倉儲與網站 << <a href='倉儲與網站.html'>Previous</a> <a href='繪圖.html'>Next</a> >> 繪圖<br /><h1>以 SSH 維護倉儲</h1>
+<p>1. 下載 Putty 工具組</p>
+<p style="padding-left: 30px;"><span>從 </span><a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/" rel="nofollow">https://www.chiark.greenend.org.uk/~sgtatham/putty/</a><span><span> </span>下載一般版, 或從<span> </span></span><a href="http://jakub.kotrla.net/putty/" rel="nofollow">http://jakub.kotrla.net/putty/</a><span><span> </span>下載特殊的可攜版本.</span></p>
+<p><span>2. 利用 y:\portablegit\bin\sh.exe 進入 shell 命令環境後, 以 </span></p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false"> ssh-keygen -t rsa -b 4096 -C "使用者學號"</pre>
+<p style="padding-left: 30px;">在 /y/home/.ssh 目錄下建立 id_rsa 與 id_rsa.pub 等 private key 與 public key</p>
+<p style="padding-left: 30px;">之後以 SciTE 開啟 id_rsa.pub 後, 將此 public key 的內容, 以新增添加到 Github.com 帳號下 personal settings -&gt; SSH and GPG keys 頁面下.</p>
+<p>3. 接下來要利用 puttygen.exe 將 id_rsa 轉為 Putty 可以解讀的 .ppk 格式, 並修改隨身系統的啟動批次檔案, 指定利用 putty 目錄下的 plink 執行 git 指令的網路代理設定.</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">修改啟動的 start.bat 加入下列設定:
+
+set GIT_HOME=%Disk%:\portablegit\bin\
+set GIT_SSH=%Disk%:\putty\plink.exe</pre>
+<p>4. 利用 puttygen.exe 載入</p><br />倉儲與網站 << <a href='倉儲與網站.html'>Previous</a> <a href='繪圖.html'>Next</a> >> 繪圖</div>
         
     <!-- footer -->
       <div class="container">

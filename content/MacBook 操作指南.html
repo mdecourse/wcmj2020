@@ -154,299 +154,62 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">Python << <a href='Python.html'>Previous</a> <a href='分組結果.html'>Next</a> >> 分組結果<br /><h1>分組</h1>
-<h4>亂數分組:</h4>
-<p><a href="https://mde.tw/wcmj2020/downloads/2020spring_wcmj_1a_list.txt">https://mde.tw/wcmj2020/downloads/2020spring_wcmj_1a_list.txt</a> was taken from <a href="https://osa.nfu.edu.tw/">https://osa.nfu.edu.tw/</a> on Feb. 19, 2020.</p>
-<p>The most updated list: <a href="http://s1.mde.nfu.edu.tw:8000/?semester=1082&amp;courseno=2418">http://s1.mde.nfu.edu.tw:8000/?semester=1082&amp;courseno=2418</a> </p>
-<p>semester: 1082</p>
-<p>courseno: 2418</p>
-<p>Under https protocol use port 7443, for http use port 8000.</p>
-<p>學員名單 URL: <input id="studListUrl" size="70" type="text" value="http://s1.mde.nfu.edu.tw:8000/?semester=1082&amp;courseno=2418 "/><br/> <input id="submit" type="submit" value="開始分組"/><br/> <textarea cols="80" id="output" rows="10"></textarea></p>
-<script src="https://mde.tw/wcmj2020/downloads/dart_ex/even_grouping/evenGrouping.js"></script>
-<p><a href="https://dartpad.github.io/embed-html.html?gh_owner=mdecourse&amp;gh_repo=cd2020&amp;gh_path=downloads/dart_ex/even_grouping&amp;theme=dark">Dart source code for random grouping</a></p>
-<h4>evenGrouping.dart:</h4>
-<pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false">import 'dart:html';
- 
-  InputElement studListUrl = querySelector("#studListUrl");
-  String studUrl;
-  // 將 Label 改為 Textarea, 避免產生過程結果嵌入所在頁面
-  TextAreaElement output = querySelector("#output");
- 
-main() {
-  querySelector("#submit").onClick.listen((e) =&gt; grouping());
-}
- 
-grouping() {
-  output.innerHtml = "";
- 
-  if (studListUrl.value != "") {
-    studUrl = studListUrl.value;
-  } else {
-    studUrl = 'https://mde.tw/group/downloads/2019fall_cp_1a_list.txt';
-  }
- 
-  // 組序由 1 開始
-  int gth = 1;
-  // 迴圈序號變數
-  int i;
-  int j;
-  int total;
-  int inc;
-  // 每組學員暫存數列
-  var gpList = [];
-  // 全班分組數列
-  var group = [];
-  // 各組人數數列
-  var numList = [];
-  var courseTitle = 'wcmj2020';
- 
-  HttpRequest.getString(studUrl).then((String resp) {
-    // 利用 trim() 去除字串最後的跳行符號, 之後再利用 split() 根據 \n 轉為數列
-    var studList = resp.trim().split("\n");
-    // 數列利用 shuffle() 方法以隨機方法弄亂順序
-    studList.shuffle();
-    total = studList.length;
-    output.text += "全班總計" + total.toString() + " 人\n";
-    numList = getNumList(studList.length);
-    inc = 0;
-    for (i in numList){
-      // 列印區隔符號
-      output.text += '=' * 20 + "\n";
-      output.text += "group $gth 有 " + i.toString() + " 人: \n";
-      gpList = [];
-      for (j = 0; j &lt; i; j++){
-        output.text += studList[j+inc] + "\n";
-        // 在各分組數列中加入將對應的學員學號
-        gpList.add(studList[j+inc]);
-      }
-      gth = gth + 1;
-      inc = inc + j;
-        //output.text += studList[j] + "\n";
-        // 逐步將各組暫存的分組數列加入全班分組數列中
-      gpList.sort();
-      group.add(gpList);
-    }
-    // 列出全班分組數列
-    output.text += group.toString() + "\n";
-    // 列出已經排序後的分組名單
-    output.text += '=' * 25 + "\n";
-    output.text += '以下為排序後的各組成員名單: \n';
-    gth = 1;
-    /*
-    404231
-    s4052
-    4062
-    s4072
-    4082
-    5072
-    5083
-    */
-    // 先列出純文字以 \n 跳行組員資料
-    for (i=0; i &lt; group.length; i++){
-      // 列印區隔符號
-      output.text += '=' * 20 + "\n";
-      output.text += "group $gth \n";
-      gpList = [];
-      for (j=0; j &lt; group[i].length; j++){
-        output.text += group[i][j] + "\n";
-      }
-      gth = gth + 1;
-    }
-    
-    gth = 1;
-    // 最後列出超文件以 &lt;br\&gt; 跳行組員資料, 包含倉儲與網站
-    for (i=0; i &lt; group.length; i++){
-      // 列印區隔符號
-      output.text += '\n' + '=' * 30 + "&lt;br \&gt;";
-      output.text += "group $gth &lt;br \&gt;";
-      gpList = [];
-      for (j=0; j &lt; group[i].length; j++){
-          if (group[i][j].startsWith('4052') || group[i][j].startsWith('4072')) {
-              output.text += "Repository: &lt;a href='https://github.com/s" + 
-                                      group[i][j] + "/" + courseTitle + "'&gt;" + group[i][j] + 
-                                      "&lt;/a&gt;" + " | Site: &lt;a href='https://s" + group[i][j] + 
-                                      ".github.io/" + courseTitle + "'&gt;" + group[i][j] + 
-                                      "&lt;/a&gt;&lt;br \&gt;";
-          }
-          else {
-              output.text += "Repository: &lt;a href='https://github.com/" + 
-                                      group[i][j] + "/" + courseTitle +"'&gt;" + group[i][j] + 
-                                      "&lt;/a&gt;" + " | Site: &lt;a href='https://" + group[i][j] + 
-                                      ".github.io/" + courseTitle + "'&gt;" + group[i][j] + 
-                                      "&lt;/a&gt;&lt;br \&gt;";
-          }
-      }
-      gth = gth + 1;
-    }
-  });
-}
- 
-List getNumList(int total){
-  // total student number
-  // int total = 65;
-  // initial each group expect to be "eachGrp" number of people
-  int eachGrp = 10;
-  // may divide into "grpNum" number of group
-  int grpNum = total ~/ eachGrp;
-  // vacant list
-  var splits = [];
-  // find remainder when total number divid into "grpNum" number of group
-  int remainder = total % grpNum;
-  // number of people in one group by calculation
-  int calGrp = total ~/ grpNum;
- 
-  for (int i = 0; i &lt; grpNum; i++) {
-    splits.add(calGrp);
-  }
-  //print(splits);
- 
-  for (int i = 0; i &lt; remainder; i++) {
-    splits[i] += 1;
-  }
-  //print(splits);
-  return splits;
- }</pre>
-<h4>index.html:</h4>
-<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">&lt;h1&gt;亂數分組:&lt;/h1&gt;
-學員名單 URL: &lt;input type="text" id="studListUrl" size="50" value="https://mde.tw/wcm2020/downloads/2020spring_wcm_1a_list.txt"&gt;&lt;br /&gt;
-&lt;input type="submit" value="開始分組" id="submit"&gt;&lt;br /&gt;
-&lt;textarea id="output" cols="80" rows="10"&gt;&lt;/textarea&gt;</pre>
-<h4>style.css:</h4>
-<pre class="brush:css;auto-links:false;toolbar:false" contenteditable="false">body {
-  color: white;
-  font-size: 20px;
-}
+    <div id="tipue_search_content">以 SSH 維護倉儲 << <a href='以 SSH 維護倉儲.html'>Previous</a> <a href='繪圖.html'>Next</a> >> 繪圖<br /><h1>MacBook 操作指南</h1>
+<h4>參考資料:</h4>
+<p style="padding-left: 30px;"><a href="https://drive.google.com/open?id=1zIJkMnFNb0QYsBbzlxAvw8t7hZdZc0hh">Mac OS X for Absolute Beginners.pdf</a> (for @gm users only)</p>
+<p style="padding-left: 30px;"><a href="https://drive.google.com/open?id=1hl53RvI1sPFDuF63_TvjuuS-9y9ZQiO3">Learn C on the Mac.pdf</a> (for @gm users only)</p>
+<p>這裡以 MacBook Air 2012 年出廠, 硬體規格:</p>
+<p style="padding-left: 30px;">macOS Catalina Version 10.15.4</p>
+<p style="padding-left: 30px;">1.8 GHz Dual-Core Intel Core i5</p>
+<p style="padding-left: 30px;">Memory $GB 1600 MHz DDR3</p>
+<p style="padding-left: 30px;">Graphics Intel HD Graphics 4000 1536 MB</p>
+<p>的操作為例, 如何存活在機械設計工程系與精密機械工程科的網際內容管理課程.</p>
+<p>由於網際內容管理課程主要以 Ｗindows 10 64 位元操作系統中的 Python 3 可攜程式環境使用為主.</p>
+<h4>從官方網站下載安裝 Python3</h4>
+<p>因此 Catalina 系統中的首要任務, 便是安裝 Python 3:</p>
+<p>在 2020.05.15 從 <a href="https://www.python.org/downloads/mac-osx/">https://www.python.org/downloads/mac-osx/</a> 可以下載安裝最新的 Python 3.8.3 解譯環境.</p>
+<h4>安裝 pip3</h4>
+<p>有了 python 3 環境之後, 就可以從 Lanuchpad -&gt; Other -&gt; Terminal 開啟終端機, 並從 get-pip.py 下載用來安裝 pip3 的程式碼, 以終端機上的指令進行安裝:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">sudo python3 get-pip.py</pre>
+<p>安裝 pip3 之後, 可以安裝 CMSiMDE 所需的 flask, flask_cors, lxml, bs4, markdown, pelican 以及 leo:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">sudo pip3 install flask flask_cors lxml bs4 markdown pelican leo</pre>
+<h4>安裝 XQuartz</h4>
+<p>之後, 就可以安裝 <a href="https://www.xquartz.org/">XQuartz</a>, 以便使用 xterm 替代 terminal.</p>
+<p>接下來假如要使用 SciTE 作為文字編輯器, 建議透過 <a href="https://www.macports.org/install.php">https://www.macports.org/install.php</a>  先根據 Catalina 操作系統版本安裝 Macports 之後, 再利用:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">sudo port install scite</pre>
+<p>安裝 SciTE 文字編輯器.</p>
+<p>至此, 再加上 Catalina 原有的 git 指令, 使用者已經可以在 MacBook 上執行與 Windows 10 64 位元操作系統上相同的:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">git clone --recurse-submodules
 
-input, select, textarea {
-font-size: 100%;
-}</pre>
-<h4>get_student.py</h4>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from flask import Flask, request 
-from flask_cors import CORS
+git add .
 
-import requests
-import bs4
-import ssl
+git commit -m "commit message"
 
-'''
-https://s1.mde.nfu.edu.tw:7443/?semester=1082&amp;courseno=0767
-cd
-2a 1082/0767
-2b 1082/0780
+git push
 
-2a 1072/0777
-2b 1072/0790
-2a 1062/0788
-2a 1062/0802
+git pull
 
-wcm
-1082/0744
+git submodule add
 
-1072/0754
-1062/0765
+git remote add
 
-wcmj
-1082/2418
-'''
+git branch
 
-app = Flask(__name__)
-CORS(app)
+git merge </pre>
+<p>等指令, 只是在執行 python 程式時, 必須使用:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">python3 wsgi.py
 
-@app.route('/studlist')
-@app.route('/')
-def studlist():
-    semester = request.args.get('semester')
-    courseno = request.args.get('courseno')
-    if semester == None:
-        semester = '1082'
-    if courseno == None:
-        courseno = '0744'
-    
-    url = 'https://osa.nfu.edu.tw/query/studlist_ajax.php'
-    post_var = {'pselyr': semester, 'pseqno': courseno}
-
-    result = requests.post(url, data = post_var)
-
-    soup = bs4.BeautifulSoup(result.content, 'lxml')
-    table = soup.find('table', {'class': 'tbcls'})
-    data = []
-    rows = table.find_all('tr')
-    for row in rows:
-        cols = row.find_all('td')
-        cols = [ele.text.strip() for ele in cols]
-        data.append([ele for ele in cols if ele]) # Get rid of empty values
-    output = ""
-    for i in data[2:]:
-        #print(i[0])
-        output +=i[0] + "\n"
-    return output
-    #return  str(pselyr) + " + " +str(pseqno)
-
-# 即使在近端仍希望以 https 模式下執行
-context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-context.load_cert_chain('localhost.crt', 'localhost.key')
-
-# 取 flaskapp.py 中的 uwsgi 變數設定
-uwsgi = False
-if uwsgi:
-    # 表示程式在雲端執行
-    application = app
-else:
-    # 表示在近端執行, 以 python3 wsgi.py 執行
-    app.run(host='127.0.0.1', port=5443, debug=True, ssl_context=context)
-</pre>
-<h4>nginx sites-available/default settings:</h4>
-<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">server {
-    listen 8000;
-    server_name s1.mde.nfu.edu.tw;
-    charset utf-8;
-    
-    listen 7443 ssl;
- 
-    location /static {
-        alias /home/kmol2019/course_studlist/static/;
-    }
- 
-    location / {
-        include uwsgi_params;
-        uwsgi_pass  127.0.0.1:8087;
-    }
-    
-    ssl_certificate /etc/stunnel/localhost.crt;
-    ssl_certificate_key /etc/stunnel/localhost.key;
-    ssl_session_timeout 5m;
-    ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
-    ssl_ciphers "HIGH:!aNULL:!MD5 or HIGH:!aNULL:!MD5:!3DES";
-    ssl_prefer_server_ciphers on;
-    try_files $uri $uri/ =404;
-}</pre>
-<h4>uwsgi7.ini</h4>
-<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[uwsgi]
-socket = 127.0.0.1:8087
-uid = kmol2019
-gid = kmol2019
-plugins-dir = /usr/lib/uwsgi/plugins/
-plugin = python3
-master = true
-logto = /var/log/uwsgi/emperor.log
-logfile-chown = kmol2019:kmol2019
-processes = 4
-threads = 2
-chdir = /home/kmol2019/course_studlist
-wsgi-file = /home/kmol2019/course_studlist/get_student.py</pre>
-<h4>/etc/systemd/system/cmsimfly.service</h4>
-<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[Unit]
-Description=uWSGI to serve CMSimfly
-After=network.target
-
-[Service]
-User=kmol2019
-Group=kmol2019
-WorkingDirectory=/home/kmol2019/uwsgi_ini
-ExecStart=/usr/local/bin/uwsgi --emperor /home/kmol2019/uwsgi_ini
-
-[Install]
-WantedBy=multi-user.target</pre><br />Python << <a href='Python.html'>Previous</a> <a href='分組結果.html'>Next</a> >> 分組結果</div>
+pip3 install certain_module</pre>
+<p>否則直接使用 python 執行, 將會用 Python 2.7 環境執行而產生錯誤.</p>
+<h4>其他建議安裝套件</h4>
+<p style="padding-left: 30px;">Microsoft Remote Desktop</p>
+<p style="padding-left: 30px;">Firefox</p>
+<p style="padding-left: 30px;">OBS</p>
+<p style="padding-left: 30px;">Visual Studio Code</p>
+<p style="padding-left: 60px;"><a href="https://drive.google.com/open?id=1VeO6HfA3eq8kn5q9m2iJ8SdGCVwUhizo">Visual Studio Code Distilled.pdf</a> (for @gm users only)</p>
+<p style="padding-left: 30px;">Flutter (Dart)</p>
+<h4>其他提示</h4>
+<p style="padding-left: 30px;">Command + Shift + . (toggle hidden folders and files)</p><br />以 SSH 維護倉儲 << <a href='以 SSH 維護倉儲.html'>Previous</a> <a href='繪圖.html'>Next</a> >> 繪圖</div>
         
     <!-- footer -->
       <div class="container">

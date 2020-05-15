@@ -2121,6 +2121,8 @@ WantedBy=multi-user.target</pre><h2>分組結果</h2>
 </ol>
 <p>以下請各學員分別利用 ShareX 與 OBS 拍攝建立與維護個人倉儲與網站的影片, 完成後將影片 embed 入個人網站的 W8 頁面中.</p>
 <h3>以 SSH 維護倉儲</h3>
+<p>由於在電腦教室時採用純 IPv6 協定上網, 因此為了能夠在近端將倉儲改版資料推送到目前只接受 IPv4 協定連線的 github, 以下除了將原本以 https 對 github 連線, 改為以 ssh 協定連線外, 在 Windows 環境下必須利用 putty 與 plink, 設定 putty 格式的 .ppk 以及能夠同時支援 IPv4 與 IPv6 的代理主機.</p>
+<p>設定步驟如下:</p>
 <p>1. 下載 Putty 工具組</p>
 <p style="padding-left: 30px;"><span>從 </span><a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/" rel="nofollow">https://www.chiark.greenend.org.uk/~sgtatham/putty/</a><span><span> </span>下載一般版, 或從<span> </span></span><a href="http://jakub.kotrla.net/putty/" rel="nofollow">http://jakub.kotrla.net/putty/</a><span><span> </span>下載特殊的可攜版本.</span></p>
 <p><span>2. 利用 y:\portablegit\bin\sh.exe 進入 shell 命令環境後, 以 </span></p>
@@ -2175,7 +2177,61 @@ Host github.com
 [submodule "cmsimde"]
 	url = https://github.com/mdecourse/cmsimde.git</pre>
 <p>之後就可以透過近端的 .ppk private key 與 Github.com 上的 public key 對應, 無需輸入帳號密碼就可以進行 git push.</p>
-<p><a href="https://drive.google.com/file/d/1VNBHNMXS1-wG7oaKDCpG5p3khsffB7oa/view?usp=sharing">W10 以 ssh 對倉儲連線設定說明影片</a> (登入 @gm 帳號後觀看)</p><h2>繪圖</h2>
+<p><a href="https://drive.google.com/file/d/1VNBHNMXS1-wG7oaKDCpG5p3khsffB7oa/view?usp=sharing">W10 以 ssh 對倉儲連線設定說明影片</a> (登入 @gm 帳號後觀看)</p>
+<h3>MacBook 操作指南</h3>
+<h4>參考資料:</h4>
+<p style="padding-left: 30px;"><a href="https://drive.google.com/open?id=1zIJkMnFNb0QYsBbzlxAvw8t7hZdZc0hh">Mac OS X for Absolute Beginners.pdf</a> (for @gm users only)</p>
+<p style="padding-left: 30px;"><a href="https://drive.google.com/open?id=1hl53RvI1sPFDuF63_TvjuuS-9y9ZQiO3">Learn C on the Mac.pdf</a> (for @gm users only)</p>
+<p>這裡以 MacBook Air 2012 年出廠, 硬體規格:</p>
+<p style="padding-left: 30px;">macOS Catalina Version 10.15.4</p>
+<p style="padding-left: 30px;">1.8 GHz Dual-Core Intel Core i5</p>
+<p style="padding-left: 30px;">Memory $GB 1600 MHz DDR3</p>
+<p style="padding-left: 30px;">Graphics Intel HD Graphics 4000 1536 MB</p>
+<p>的操作為例, 如何存活在機械設計工程系與精密機械工程科的網際內容管理課程.</p>
+<p>由於網際內容管理課程主要以 Ｗindows 10 64 位元操作系統中的 Python 3 可攜程式環境使用為主.</p>
+<h4>從官方網站下載安裝 Python3</h4>
+<p>因此 Catalina 系統中的首要任務, 便是安裝 Python 3:</p>
+<p>在 2020.05.15 從 <a href="https://www.python.org/downloads/mac-osx/">https://www.python.org/downloads/mac-osx/</a> 可以下載安裝最新的 Python 3.8.3 解譯環境.</p>
+<h4>安裝 pip3</h4>
+<p>有了 python 3 環境之後, 就可以從 Lanuchpad -&gt; Other -&gt; Terminal 開啟終端機, 並從 get-pip.py 下載用來安裝 pip3 的程式碼, 以終端機上的指令進行安裝:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">sudo python3 get-pip.py</pre>
+<p>安裝 pip3 之後, 可以安裝 CMSiMDE 所需的 flask, flask_cors, lxml, bs4, markdown, pelican 以及 leo:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">sudo pip3 install flask flask_cors lxml bs4 markdown pelican leo</pre>
+<h4>安裝 XQuartz</h4>
+<p>之後, 就可以安裝 <a href="https://www.xquartz.org/">XQuartz</a>, 以便使用 xterm 替代 terminal.</p>
+<p>接下來假如要使用 SciTE 作為文字編輯器, 建議透過 <a href="https://www.macports.org/install.php">https://www.macports.org/install.php</a>  先根據 Catalina 操作系統版本安裝 Macports 之後, 再利用:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">sudo port install scite</pre>
+<p>安裝 SciTE 文字編輯器.</p>
+<p>至此, 再加上 Catalina 原有的 git 指令, 使用者已經可以在 MacBook 上執行與 Windows 10 64 位元操作系統上相同的:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">git clone --recurse-submodules
+
+git add .
+
+git commit -m "commit message"
+
+git push
+
+git pull
+
+git submodule add
+
+git remote add
+
+git branch
+
+git merge </pre>
+<p>等指令, 只是在執行 python 程式時, 必須使用:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">python3 wsgi.py
+
+pip3 install certain_module</pre>
+<p>否則直接使用 python 執行, 將會用 Python 2.7 環境執行而產生錯誤.</p>
+<h4>其他建議安裝套件</h4>
+<p style="padding-left: 30px;">Microsoft Remote Desktop</p>
+<p style="padding-left: 30px;">Firefox</p>
+<p style="padding-left: 30px;">OBS</p>
+<p style="padding-left: 30px;">Visual Studio Code</p>
+<p style="padding-left: 60px;"><a href="https://drive.google.com/open?id=1VeO6HfA3eq8kn5q9m2iJ8SdGCVwUhizo">Visual Studio Code Distilled.pdf</a> (for @gm users only)</p>
+<p style="padding-left: 30px;">Flutter (Dart)</p><h2>繪圖</h2>
 <p><a href="https://github.com/mypaint/mypaint">https://github.com/mypaint/mypaint</a></p>
 <p><a href="https://github.com/mypaint/mypaint/wiki/v1.2-User-Manual">https://github.com/mypaint/mypaint/wiki/v1.2-User-Manual</a></p>
 <p><a href="/downloads/MyPaint筆刷說明.pdf">Mypaint筆刷說明.pdf</a></p>
@@ -2211,5 +2267,6 @@ Host github.com
 <p>學會利用 ShareX 與 OBS 拍攝螢幕操作影片, 並將個人維護倉儲與網站的過程影片放入個人網站中.</p>
 <h4>W9</h4>
 <p style="padding-left: 30px;"><a href="https://drive.google.com/file/d/1mqtHKdD2EDJjUvfs76T1-Cs0OwXVJtvO/view?usp=sharing">wcmj2020 W9 第一段影片</a></p>
+<p style="padding-left: 30px;"><a href="https://drive.google.com/file/d/1mSFCPGNaO_DYAjOA-C2QL1HessDL0R4H/view?usp=sharing">wcmj2020 W9 第二段影片</a></p>
 <p></p>
 <p></p>

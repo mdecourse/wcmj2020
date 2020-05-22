@@ -143,7 +143,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li class='has-children'><a href='有關本網站.html'>有關本網站</a><ul class='dropdown'><li class='has-children'><a href='CMSiMDE.html'>CMSiMDE</a><ul class='dropdown'><li><a href='可攜程式環境.html'>可攜程式環境</a><li><a href='C 程式.html'>C 程式</a><li><a href='Python 程式.html'>Python 程式</a><li><a href='Lua 程式.html'>Lua 程式</a></li></li></ul></ul><li class='has-children'><a href='電腦與網路.html'>電腦與網路</a><ul class='dropdown'><li><a href='Python.html'>Python</a></li></ul><li class='has-children'><a href='分組.html'>分組</a><ul class='dropdown'><li><a href='分組結果.html'>分組結果</a><li><a href='實習項目.html'>實習項目</a></li></ul><li class='has-children'><a href='主題.html'>主題</a><ul class='dropdown'><li class='has-children'><a href='倉儲與網站.html'>倉儲與網站</a><ul class='dropdown'><li><a href='以 SSH 維護倉儲.html'>以 SSH 維護倉儲</a><li><a href='MacBook 操作指南.html'>MacBook 操作指南</a></li></ul><li><a href='繪圖.html'>繪圖</a><li><a href='W6-W9.html'>W6-W9</a><li><a href='W12.html'>W12</a></li>
+                     <li class='has-children'><a href='有關本網站.html'>有關本網站</a><ul class='dropdown'><li class='has-children'><a href='CMSiMDE.html'>CMSiMDE</a><ul class='dropdown'><li><a href='可攜程式環境.html'>可攜程式環境</a><li><a href='C 程式.html'>C 程式</a><li><a href='Python 程式.html'>Python 程式</a><li><a href='Lua 程式.html'>Lua 程式</a></li></li></ul></ul><li class='has-children'><a href='電腦與網路.html'>電腦與網路</a><ul class='dropdown'><li><a href='Python.html'>Python</a></li></ul><li class='has-children'><a href='分組.html'>分組</a><ul class='dropdown'><li><a href='分組結果.html'>分組結果</a><li><a href='實習項目.html'>實習項目</a></li></ul><li class='has-children'><a href='主題.html'>主題</a><ul class='dropdown'><li class='has-children'><a href='倉儲與網站.html'>倉儲與網站</a><ul class='dropdown'><li><a href='以 SSH 維護倉儲.html'>以 SSH 維護倉儲</a></li></ul><li><a href='繪圖.html'>繪圖</a><li><a href='W6-W9.html'>W6-W9</a><li><a href='W12-W13.html'>W12-W13</a><li class='has-children'><a href='W14.html'>W14</a><ul class='dropdown'><li><a href='MacBook 操作指南.html'>MacBook 操作指南</a></li></ul><li><a href='W15-W18.html'>W15-W18</a></li>
                       </ul>
                 </nav>
               </div>
@@ -154,10 +154,194 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">W6-W9 << <a href='W6-W9.html'>Previous</a> <br /><h1>W12</h1>
+    <div id="tipue_search_content">W6-W9 << <a href='W6-W9.html'>Previous</a> <a href='W14.html'>Next</a> >> W14<br /><h1>W12-W13</h1>
+<h4>W12</h4>
 <p style="padding-left: 30px;"><a href="https://drive.google.com/open?id=1d_YpSrTdKLPKZjkHW2TNsbHRU1ePNRFl">Leo Editor 與 Pelican blog 使用說明影片</a></p>
-<p></p>
-<p></p><br />W6-W9 << <a href='W6-W9.html'>Previous</a> </div>
+<h4>W13</h4>
+<p style="padding-left: 30px;">Pelican Blog 內容與 Google Blogger 同步</p>
+<p style="padding-left: 30px;">利用 Windows 10 設定 -&gt; 選擇預設網頁瀏覽器, 使用 Google Chrome 作為預設瀏覽器.</p>
+<p style="padding-left: 30px;">隨身程式系統必須安裝 <span>google-api-python-client 與 oauth2client</span><br/> <br/> pip install google-api-python-client oauth2client<br/> <br/>OAuth 2.0 client IDs 程式類別可以選擇 other<br/> <br/>使用者完成 client_secrets.json 設定後, 必須將檔案存在倉儲目錄外部</p>
+<p style="padding-left: 30px;">add_to_blogger 按鈕內容:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from markdown import markdown
+from oauth2client import client
+from googleapiclient import sample_tools
+import os
+
+os.environ['TZ'] = 'Asia/Taipei'
+argv = ""
+# 認證並建立服務
+# name of the api is "blogger", version is "v3"
+# description of the api is __doc__
+# file name of the application: location of client_secrets.json
+service, flags = sample_tools.init(
+  argv, 'blogger', 'v3', __doc__, "./../../client_secrets.json",
+  scope='https://www.googleapis.com/auth/blogger')
+
+
+def get_cat_tag_content(data):
+    # 請注意, 因為 data 來自 .md 的檔案 內容, 第1行為 ---
+    # 用跳行符號分割
+    data_list = data.split("\n")
+    #第 2 行為 title
+    title= data_list[1]
+    #第 4 行為 category
+    category = data_list[3]
+    #第 5 行為 tags
+    tags = data_list[4]
+    # 有多項資料的 content 型別為數列
+    # 再將第 9 行之後的資料數列串回成以跳行隔開的資料
+    content = "\n".join(data_list[8:])
+    # 先將截斷摘要與內文的 pelican md 檔按符號, 換成 Blogger 的 &lt;!--more--&gt;
+    content = content.replace('&lt;!-- PELICAN_END_SUMMARY --&gt;', '&lt;!--more--&gt;')
+    # 接著若內容有 ~~~python 與 ~~~ 則換成 Wordpress 格式
+    #content = content.replace('~~~python', '[code lang="python"]')
+    #content = content.replace('~~~', '[/code]')
+    return title, category, tags, content
+
+# 從目前所在節點的 body pan 中取出類別, tags 以及文章內容
+# p.h 為 @clean filename.md
+# 因為要使用 @clean 節點掛上為後的 blogger post_id, 因此改為讀 .md 檔案
+md_filename = p.h.split(" ")[1]
+with open(md_filename, 'r', encoding="utf-8") as content_file:
+    md_content = content_file.read()
+# title_str, category_str, tags_str, content = get_cat_tag_content(p.b)
+title_str, category_str, tags_str, content = get_cat_tag_content(md_content)
+category = category_str.split(":")[1]
+tags = tags_str.split(":")[1].split(",")
+tags.append(category)
+# title 是一個單獨的字串
+title = title_str.split(":")[1]
+# 將 markdown 格式 content 轉為 html
+content = markdown(content)
+# 以下處理 content 的 &lt;h2&gt; 標題
+content = content.replace("&lt;h2&gt;", "&lt;h2&gt;&lt;font size='4'&gt;")
+content = content.replace("&lt;/h2&gt;", "&lt;/font&gt;&lt;/h2&gt;")
+# g.es(content)
+
+try:
+    '''
+    users = service.users()
+    # 取得使用者 profile 資料
+    user = users.get(userId='self').execute()
+    print('網誌名稱: %s' % user['displayName'])
+    '''
+    blogs = service.blogs()
+    # 取得使用者所建立網誌名稱
+    blogs = blogs.listByUser(userId='self').execute()
+    # post_id is now blogs["items"][0]["id"]
+    blog_id = blogs["items"][0]["id"]
+    #for blog in blogs['items']:
+        #print(blog['name'], blog['url'])
+    posts = service.posts()
+    # 新增網誌 post 時, 需要 post_id
+    body = {
+    "kind": "blogger#post",
+    "id": blog_id,
+    "title": title,
+    # 利用 markdown 函式, 將 .md 的內文轉為 html, 作為 Blogger 的文章內容
+    "content": content,
+    "labels": tags
+    }
+    insert = posts.insert(blogId=blog_id, body=body)
+    posts_doc = insert.execute()
+    post_id = posts_doc["id"]
+    #print(posts_doc)
+    os.remove("blogger.dat")
+    # 利用最後的 child 節點來儲存 post_id
+    to_save_post_id = p.insertAsLastChild()   
+    # 改為內文為空的節點, id 直接標在 head 標題 
+    to_save_post_id.b = ""
+    to_save_post_id.h = post_id
+    # 因為新增節點, commander 必須 redraw
+    c.redraw()
+    g.es("post_id 為", post_id)
+    g.es("已經將資料送往 Blogger!")
+except(client.AccessTokenRefreshError):
+    g.es("error")
+</pre>
+<p>edit_to_blogger 按鈕內容:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from markdown import markdown
+from oauth2client import client
+from googleapiclient import sample_tools
+import os
+
+os.environ['TZ'] = 'Asia/Taipei'
+argv = ""
+# 認證並建立服務
+# name of the api is "blogger", version is "v3"
+# description of the api is __doc__
+# file name of the application: location of client_secrets.json
+service, flags = sample_tools.init(
+  argv, 'blogger', 'v3', __doc__, "./../../client_secrets.json",
+  scope='https://www.googleapis.com/auth/blogger')
+
+
+def get_cat_tag_content(data):
+    # 請注意, 因為 data 來自 .md 的檔案 內容, 第1行為 ---
+    # 用跳行符號分割
+    data_list = data.split("\n")
+    #第 2 行為 title
+    title= data_list[1]
+    #第 4 行為 category
+    category = data_list[3]
+    #第 5 行為 tags
+    tags = data_list[4]
+    # 有多項資料的 content 型別為數列
+    # 再將第 9 行之後的資料數列串回成以跳行隔開的資料
+    content = "\n".join(data_list[8:])
+    # 先將截斷摘要與內文的 pelican md 檔按符號, 換成 Blogger 的 &lt;!--more--&gt;
+    content = content.replace('&lt;!-- PELICAN_END_SUMMARY --&gt;', '&lt;!--more--&gt;')
+    # 接著若內容有 ~~~python 與 ~~~ 則換成 Wordpress 格式
+    #content = content.replace('~~~python', '[code lang="python"]')
+    #content = content.replace('~~~', '[/code]')
+    return title, category, tags, content
+
+# 從目前所在節點的 body pan 中取出類別, tags 以及文章內容
+# p.h 為 @clean filename.md
+# 因為要使用 @clean 節點掛上為後的 blogger post_id, 因此改為讀 .md 檔案
+md_filename = p.h.split(" ")[1]
+with open(md_filename, 'r', encoding="utf-8") as content_file:
+    md_content = content_file.read()
+# title_str, category_str, tags_str, content = get_cat_tag_content(p.b)
+title_str, category_str, tags_str, content = get_cat_tag_content(md_content)
+category = category_str.split(":")[1]
+tags = tags_str.split(":")[1].split(",")
+tags.append(category)
+# title 是一個單獨的字串
+title = title_str.split(":")[1]
+# 將 markdown 格式 content 轉為 html
+content = markdown(content)
+# 以下處理 content 的 &lt;h2&gt; 標題
+content = content.replace("&lt;h2&gt;", "&lt;h2&gt;&lt;font size='4'&gt;")
+content = content.replace("&lt;/h2&gt;", "&lt;/font&gt;&lt;/h2&gt;")
+# g.es(content)
+
+try:
+    blogs = service.blogs()
+    # 取得使用者所建立網誌名稱
+    blogs = blogs.listByUser(userId='self').execute()
+    blog_id = blogs["items"][0]["id"]
+    # 設法取得原 post 的 id
+    postid_outline = p.getLastChild()
+    # 直接從標題取得 post 的 id 號碼
+    post_id = postid_outline.h
+    posts = service.posts()
+    # 更新網誌文章時的 body
+    body = {
+    "kind": "blogger#post",
+    "title": title,
+    "content": content
+    }
+    # need to save postId to outline head
+    update = posts.update(blogId=blog_id, postId=post_id, body=body, publish=True)
+    update_doc = update.execute()
+    os.remove("blogger.dat")
+    g.es("post_id 為", post_id)
+    g.es("已經將更新資料送往 Blogger!")
+except(client.AccessTokenRefreshError):
+    g.es("error")
+</pre>
+<br />W6-W9 << <a href='W6-W9.html'>Previous</a> <a href='W14.html'>Next</a> >> W14</div>
         
     <!-- footer -->
       <div class="container">

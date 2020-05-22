@@ -4,64 +4,71 @@ xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitem
 xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-<loc>./</loc>
-<lastmod>2020-02-27T11:00:30-00:00</lastmod>
+<loc>https://mdecourse.github.io/wcmj2020/blog/</loc>
+<lastmod>2020-05-22T14:24:22-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>./archives.html</loc>
-<lastmod>2020-02-27T11:00:30-00:00</lastmod>
+<loc>https://mdecourse.github.io/wcmj2020/blog/archives.html</loc>
+<lastmod>2020-05-22T14:24:22-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>./tags.html</loc>
-<lastmod>2020-02-27T11:00:30-00:00</lastmod>
+<loc>https://mdecourse.github.io/wcmj2020/blog/tags.html</loc>
+<lastmod>2020-05-22T14:24:22-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>./categories.html</loc>
-<lastmod>2020-02-27T11:00:30-00:00</lastmod>
+<loc>https://mdecourse.github.io/wcmj2020/blog/categories.html</loc>
+<lastmod>2020-05-22T14:24:22-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>./pages/about/</loc>
-<lastmod>2020-02-27T10:59:22+08:00</lastmod>
+<loc>https://mdecourse.github.io/wcmj2020/blog/pages/about/</loc>
+<lastmod>2020-04-24T15:21:45+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>./2018-Fall-32-bit-Windows.html</loc>
-<lastmod>2018-09-10T11:00:00+08:00</lastmod>
+<loc>https://mdecourse.github.io/wcmj2020/blog/2020-wcm-w12-summary.html</loc>
+<lastmod>2020-05-22T14:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>./category/misc.html</loc>
-<lastmod>2018-09-10T11:00:00+08:06</lastmod>
+<loc>https://mdecourse.github.io/wcmj2020/blog/category/w12.html</loc>
+<lastmod>2020-05-22T14:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>./tag/2018fallcp.html</loc>
-<lastmod>2018-09-10T11:00:00+08:06</lastmod>
+<loc>https://mdecourse.github.io/wcmj2020/blog/tag/pelican.html</loc>
+<lastmod>2020-05-22T14:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>./author/yen.html</loc>
-<lastmod>2018-09-10T11:00:00+08:06</lastmod>
+<loc>https://mdecourse.github.io/wcmj2020/blog/tag/blog.html</loc>
+<lastmod>2020-05-22T14:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://mdecourse.github.io/wcmj2020/blog/author/yen.html</loc>
+<lastmod>2020-05-22T14:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

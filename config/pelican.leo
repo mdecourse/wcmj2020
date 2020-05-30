@@ -11,6 +11,11 @@
 <v t="yen.20170108171605.3"><vh>@string initial_split_orientation = horizontal</vh></v>
 </v>
 <v t="yen.20200530132256.1"><vh>create credential token</vh></v>
+<v t="yen.20200530161607.1"><vh>create credential token for gmail</vh>
+<v t="yen.20200530195838.1"><vh>send mail</vh></v>
+<v t="yen.20200530195905.1"><vh>send mail with attachment</vh></v>
+<v t="yen.20200530172422.1"><vh>Quota</vh></v>
+</v>
 <v t="yen.20200530131738.1"><vh>@button add-blog-mdecourse</vh></v>
 <v t="yen.20200530131815.1"><vh>@button edit-blog-mdecourse</vh></v>
 <v t="yen.20170108171733.1"><vh>@path ../</vh>
@@ -638,7 +643,6 @@ import pickle
 import os
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request
 
 
 SCOPES = ['https://www.googleapis.com/auth/blogger', ]
@@ -673,5 +677,144 @@ g.es(service)</t>
 
 在 [Leo Editor] 中向下移動節點的方法: ctrl + d, 表示要將節點往 down (下) 移動.</t>
 <t tx="yen.20200530135512.1"></t>
+<t tx="yen.20200530161607.1">@language python
+# https://developers.google.com/blogger/docs/3.0/using
+# under Mac command + b to execute
+import pickle
+import os
+from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
+
+
+SCOPES = ['https://www.googleapis.com/auth/gmail.send', ]
+
+# we check if the file tBo store the credentials exists
+if not os.path.exists('./../../scrum_gmail_token.dat'):
+
+    flow = InstalledAppFlow.from_client_secrets_file('./../../scrum_client_secrets.json', SCOPES)
+    credentials = flow.run_local_server(port=0)
+
+    with open('./../../scrum_gmail_token.dat', 'wb') as credentials_dat:
+        pickle.dump(credentials, credentials_dat)
+else:
+    with open('./../../scrum_gmail_token.dat', 'rb') as credentials_dat:
+        credentials = pickle.load(credentials_dat)
+service = build('gmail', 'v1', credentials=credentials)
+g.es(service)</t>
+<t tx="yen.20200530172422.1">https://console.cloud.google.com/iam-admin/quotas?service=blogger.googleapis.com</t>
+<t tx="yen.20200530195838.1"># https://gist.github.com/WJDigby/e36203102a195797c712c6cfe5020b21
+import pickle
+from googleapiclient.discovery import build
+from email.mime.text import MIMEText
+from base64 import urlsafe_b64encode
+from apiclient import errors
+
+def create_message(sender, to, subject, message_text):
+    """Create a message for an email.
+        
+    Args:
+        sender: Email address of the sender.
+        to: Email address of the receiver.
+        subject: The subject of the email message.
+        message_text: The text of the email message.
+        
+    Returns:
+        An object containing a base64url encoded email object.
+    """
+    message = MIMEText(message_text)
+    message['to'] = to
+    message['from'] = sender
+    message['subject'] = subject
+    encoded_message = urlsafe_b64encode(message.as_bytes())
+    return {'raw': encoded_message.decode()}
+  
+def send_message(service, user_id, message):
+    """Send an email message.
+    
+    Args:
+        service: Authorized Gmail API service instance.
+        user_id: User's email address. The special value "me"
+        can be used to indicate the authenticated user.
+        message: Message to be sent.
+        
+    Returns:
+        Sent Message.
+    """
+    try:
+        message = (service.users().messages().send(userId=user_id, body=message).execute())
+        #print('Message Id: %s' % message['id'])
+        return message
+    except errors.HttpError as error:
+        #print('An error occurred: %s' % error)
+        g.es("error")
+
+
+#SCOPES = ['https://www.googleapis.com/auth/gmail.send', ]
+
+with open('./../../scrum_gmail_token.dat', 'rb') as credentials_dat:
+    credentials = pickle.load(credentials_dat)
+service = build('gmail', 'v1', credentials=credentials)
+#g.es(service)
+
+sender = "scrum1@domain"
+to = "scrum2@domain"
+subject = "測試"
+message_text = "這是測試內文 http://www.google.com"
+message = create_message(sender, to, subject, message_text)
+user_id = "me"
+send_message(service, user_id, message)
+g.es(" 已經寄出")
+
+</t>
+<t tx="yen.20200530195905.1">def create_message_with_attachment(
+    sender, to, subject, message_text, file):
+  """Create a message for an email.
+
+  Args:
+    sender: Email address of the sender.
+    to: Email address of the receiver.
+    subject: The subject of the email message.
+    message_text: The text of the email message.
+    file: The path to the file to be attached.
+
+  Returns:
+    An object containing a base64url encoded email object.
+  """
+  message = MIMEMultipart()
+  message['to'] = to
+  message['from'] = sender
+  message['subject'] = subject
+
+  msg = MIMEText(message_text)
+  message.attach(msg)
+
+  content_type, encoding = mimetypes.guess_type(file)
+
+  if content_type is None or encoding is not None:
+    content_type = 'application/octet-stream'
+  main_type, sub_type = content_type.split('/', 1)
+  if main_type == 'text':
+    fp = open(file, 'rb')
+    msg = MIMEText(fp.read(), _subtype=sub_type)
+    fp.close()
+  elif main_type == 'image':
+    fp = open(file, 'rb')
+    msg = MIMEImage(fp.read(), _subtype=sub_type)
+    fp.close()
+  elif main_type == 'audio':
+    fp = open(file, 'rb')
+    msg = MIMEAudio(fp.read(), _subtype=sub_type)
+    fp.close()
+  else:
+    fp = open(file, 'rb')
+    msg = MIMEBase(main_type, sub_type)
+    msg.set_payload(fp.read())
+    fp.close()
+  filename = os.path.basename(file)
+  msg.add_header('Content-Disposition', 'attachment', filename=filename)
+  message.attach(msg)
+
+  return {'raw': base64.urlsafe_b64encode(message.as_string())}
+</t>
 </tnodes>
 </leo_file>

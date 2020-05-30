@@ -154,18 +154,40 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">CMSiMDE << <a href='CMSiMDE.html'>Previous</a> <a href='C 程式.html'>Next</a> >> C 程式<br /><h1>可攜程式環境</h1>
-<p>為了讓工程師可以在不同的 Windows 10 64 位元電腦上管理 CMSiMDE 網際內容管理系統, 因此需要 Python 解譯環境以及一個文字檔案的編輯器.</p>
-<p>這裡所安裝的 Python 解譯器選擇由 C 所編寫的 CPython, 可以從 <a href="https://www.python.org/">https://www.python.org/</a>  下載安裝. 但是在此我們要將 Python 解譯系統配置在 USB 隨身碟上, 使用者可以隨身攜帶, 一旦配置完成後, 可以在任何一台 Windows 10 64 位元的筆電或電腦上執行 Python 或 C 程式.</p>
-<p>可攜 Python 程式環境的建立步驟:</p>
-<p style="padding-left: 30px;">安裝 Python 套件時, 不要安裝 pip, 之後將 Python38 目錄複製到 data 目錄中, 然後建立 start.bat 指定使用可攜系統中的 Python, 之後再利用 g<a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;ved=2ahUKEwivpbG6gfHoAhURrZQKHUT8ARcQFjAAegQIAhAB&amp;url=https%3A%2F%2Fbootstrap.pypa.io%2Fget-pip.py&amp;usg=AOvVaw0zKVO_zW0nkF7s0zdjWFNj">et-pip.py,</a> 以命令列中的 python get-pip.py 安裝 pip.</p>
-<p>可攜 Tiny C 程式環境的建立步驟:</p>
-<p style="padding-left: 30px;">從 <a href="https://bellard.org/tcc/">https://bellard.org/tcc/</a> 下載 Tiny C, 將 tcc 解開壓縮後放到 data 目錄中. 然後修改 wscite 目錄中的 cpp.properties, 使用 Tiny C 類解譯 .c 程式.</p>
-<p>選用的文字編輯器: <a href="https://www.scintilla.org/SciTE.html">https://www.scintilla.org/SciTE.html</a></p>
-<p>建立完成的可攜程式環境:</p>
-<p style="padding-left: 30px;"><span style="text-decoration: line-through;">下載 <a href="https://drive.google.com/open?id=1SvMKQFViJ0mskt20UhSqkjzckB3noSJH">wcm2020_w2.7z (舊資料)</a></span></p>
-<p style="padding-left: 30px;">請重新下載 <a href="https://drive.google.com/open?id=1xDTDfcHU18ipqZNbOufMkSZqibqNeL2T">wcmj2020_tool.7z</a>, 檔案大小為 435 MB, 解開壓縮後為 1.8 GB (其中包括 Mypaint, Dia 與 OBS 等)</p>
-<p style="padding-left: 30px;">將 wcmj2020_tool.7z 解壓縮到隨身碟或電腦硬碟中, 將 home 與 home_ipv6 目錄中的 .gitconfig user.name 與 user.email 改為自己的 Github 帳號與 email 後, 利用 start.bat 啟動可攜系統, 利用 stop.bat 關閉可攜系統.</p><br />CMSiMDE << <a href='CMSiMDE.html'>Previous</a> <a href='C 程式.html'>Next</a> >> C 程式</div>
+    <div id="tipue_search_content">W12-W13 << <a href='W12-W13.html'>Previous</a> <a href='W14.html'>Next</a> >> W14<br /><h1>Blogger API</h1>
+<p>基本概念:</p>
+<p style="padding-left: 30px;">1. 這裡所指的 Blogger API 為: <a href="https://developers.google.com/blogger/docs/3.0/using">https://developers.google.com/blogger/docs/3.0/using</a></p>
+<p style="padding-left: 30px;">2. 將 CMSiMDE 中的 Pelican Blog 內容同步到 Google Blogger 的目的, 在讓網際內容管理系統中的網誌原始資料修改過程具備版次, 而且可同時將網誌出版在 Github Pages 與 Google Blogger 中, 讓網際內容的保存較具有永續性.</p>
+<p style="padding-left: 30px;">3. Google Blogger 中的網誌系統各有獨立 ID, 這裡稱為 blog_id, 而網誌中的每一篇文章各有獨立 ID, 這裡稱為 post_id.</p>
+<p style="padding-left: 30px;">4. Google Blogger 管理者登入後, 在 Settings - Permissions 項下, 允許 invite more authors, 而且在 Settings - Permissions - Blog admins and Authors 項下, 允許將所邀請共同寫作的 Author 提升為 Admin 管理者.</p>
+<p style="padding-left: 30px;">5. Google 的每一個 API 都允許使用者建立以 Oauth2 為基礎的登入使用授權憑證, 配合所啟動的各種 API 程式庫, 一旦啟用並登入後, 可以透過程式方法, 呼叫程式庫功能, 對各種 Google 所提供的服務 (Blogger, Drive, Gmail, Calendar 等) 新增內容. 以 Blogger 而言, 只要使用者被設為某一網誌的共同作者, 即擁有在該網誌新增或編輯自己所發布的網誌文章.</p>
+<p style="padding-left: 30px;">6. 使用者登入 Google 帳號後, 在 <a href="https://console.developers.google.com">https://console.developers.google.com</a> 中所建立的 Oauth2 client ID, 可以下載存為 client_secrets.json 檔案.</p>
+<p style="padding-left: 30px;">7. client_secrets.json 檔案則可以透過下列程式, 轉換為 credential_token.dat, 使用者針對特定啟用的 API 程式庫, 可以在讀取 credential_token.dat 的情況下, 取得與登入 Gmail 帳號相同的使用授權, 直接在擁有權限的 blog_id 中新增特定的文章 (並以特定的 post_id 辨識).</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">@language python
+# https://developers.google.com/blogger/docs/3.0/using
+# under Mac command + b to execute
+import pickle
+import os
+from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
+
+
+SCOPES = ['https://www.googleapis.com/auth/blogger', ]
+
+# we check if the file tBo store the credentials exists
+if not os.path.exists('./../../yen_gm_blogger_token.dat'):
+
+    flow = InstalledAppFlow.from_client_secrets_file('./../../yen_gm_blogger_secrets.json', SCOPES)
+    credentials = flow.run_local_server()
+
+    with open('./../../yen_gm_blogger_token.dat', 'wb') as credentials_dat:
+        pickle.dump(credentials, credentials_dat)
+else:
+    with open('./../../yen_gm_blogger_token.dat', 'rb') as credentials_dat:
+        credentials = pickle.load(credentials_dat)
+service = build('blogger', 'v3', credentials=credentials)
+g.es(service)</pre>
+<p style="padding-left: 30px;"></p><br />W12-W13 << <a href='W12-W13.html'>Previous</a> <a href='W14.html'>Next</a> >> W14</div>
         
     <!-- footer -->
       <div class="container">

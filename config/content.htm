@@ -2485,7 +2485,124 @@ g.es(service)</pre>
 <p style="padding-left: 60px;">與 </p>
 <p style="padding-left: 60px;">pip3 install <span> flask flask_cors lxml bs4 markdown pelican leo</span></p>
 <p>Mac OS X 操作系統</p>
-<p style="padding-left: 30px;">與 Ubuntu 20.04 類似.</p><h3>MacBook 操作指南</h3>
+<p style="padding-left: 30px;">與 Ubuntu 20.04 類似.</p><h3>新增 blogger 文章</h3>
+<h4>w14_blogger_add_1.py</h4>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">'''
+用來測試 Google Blogger Python API 新增文章程式
+
+pip install google-api-python-client oauth2client
+
+'''
+
+import sys
+from oauth2client import client
+from googleapiclient import sample_tools
+
+argv = ""
+# 認證並建立服務
+service, flags = sample_tools.init(
+  argv, 'blogger', 'v3', __doc__, './client_secrets.json',
+  scope='https://www.googleapis.com/auth/blogger')
+
+try:
+    users = service.users()
+    # 取得使用者 profile 資料
+    user = users.get(userId='self').execute()
+    print('網誌名稱: %s' % user['displayName'])
+    blogs = service.blogs()
+    # 取得使用者所建立網誌名稱
+    blogs = blogs.listByUser(userId='self').execute()
+    for blog in blogs['items']:
+        print(blog['name'], blog['url'])
+    posts = service.posts()
+    # 新增網誌 post 時, 需要 blog id
+
+    body = {
+    "kind": "blogger#post",
+    "id": "123",
+    "title": "透過 Python 程式新增網誌文章1",
+    "content":"使用 Google Blogger API 可以利用程式新增網誌文章內容1"
+    }
+    
+    insert = posts.insert(blogId='123', body=body)
+    posts_doc = insert.execute()
+    print(posts_doc)
+    
+    '''
+    # 更新網誌文章時的 body
+    body = {
+    "kind": "blogger#post",
+    "title": "透過 Python 程式修改網誌文章2",
+    "content": "使用 Google Blogger API 可以利用程式修改網誌文章內容. http://mde.tw/cd2019"
+    }
+    
+    update = posts.update(blogId="123", postId="456", body=body, publish=True)
+    update_doc = update.execute()
+    print(update_doc)
+    '''
+except(client.AccessTokenRefreshError):
+    print("error")
+    </pre>
+<h3>編輯 Blogger 文章</h3>
+<h4>w14_blogger_edit_1.py</h4>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">'''
+用來測試 Google Blogger Python API 編輯文章程式
+
+pip install google-api-python-client oauth2client
+
+'''
+
+import sys
+from oauth2client import client
+from googleapiclient import sample_tools
+
+argv = ""
+# 認證並建立服務
+service, flags = sample_tools.init(
+  argv, 'blogger', 'v3', __doc__, './client_secrets.json',
+  scope='https://www.googleapis.com/auth/blogger')
+
+try:
+    users = service.users()
+    # 取得使用者 profile 資料
+    user = users.get(userId='self').execute()
+    print('網誌名稱: %s' % user['displayName'])
+    blogs = service.blogs()
+    # 取得使用者所建立網誌名稱
+    blogs = blogs.listByUser(userId='self').execute()
+    for blog in blogs['items']:
+        print(blog['name'], blog['url'])
+    posts = service.posts()
+    # 新增網誌 post 時, 需要 blog id
+
+    '''
+    body = {
+    "kind": "blogger#post",
+    "id": "123",
+    "title": "透過 Python 程式新增網誌文章1",
+    "content":"使用 Google Blogger API 可以利用程式新增網誌文章內容1"
+    }
+    
+    insert = posts.insert(blogId='123', body=body)
+    posts_doc = insert.execute()
+    print(posts_doc)
+    '''
+
+    # 更新網誌文章時的 body
+    body = {
+    "kind": "blogger#post",
+    "title": "透過 Python 程式修改網誌文章2",
+    "content": "使用 Google Blogger API 可以利用程式修改網誌文章內容. http://mde.tw/cd2019"
+    }
+    
+    update = posts.update(blogId="123", postId="456", body=body, publish=True)
+    update_doc = update.execute()
+    print(update_doc)
+
+except(client.AccessTokenRefreshError):
+    print("error")
+    </pre>
+<h3>MacBook 操作指南</h3>
 <h4>參考資料:</h4>
 <p style="padding-left: 30px;"><a href="https://drive.google.com/open?id=1zIJkMnFNb0QYsBbzlxAvw8t7hZdZc0hh">Mac OS X for Absolute Beginners.pdf</a> (for @gm users only)</p>
 <p style="padding-left: 30px;"><a href="https://drive.google.com/open?id=1hl53RvI1sPFDuF63_TvjuuS-9y9ZQiO3">Learn C on the Mac.pdf</a> (for @gm users only)</p>
@@ -2540,8 +2657,7 @@ pip3 install certain_module</pre>
 <p style="padding-left: 60px;"><a href="https://drive.google.com/open?id=1VeO6HfA3eq8kn5q9m2iJ8SdGCVwUhizo">Visual Studio Code Distilled.pdf</a> (for @gm users only)</p>
 <p style="padding-left: 30px;">Flutter (Dart)</p>
 <h4>其他提示</h4>
-<p style="padding-left: 30px;">Command + Shift + . (toggle hidden folders and files)</p>
-<h2>W15-W18</h2>
+<p style="padding-left: 30px;">Command + Shift + . (toggle hidden folders and files)</p><h2>W15-W18</h2>
 <p>各分組除了必須將 W1-W14 週的所有上課內容, 以圖文及影音資料加以整理在個人及分組倉儲、網站及簡報外.</p>
 <p>可以自選另一主題, 將分組協同的過程與內容整理在個人與分組的倉儲資料中.</p>
 <h3>未來規劃</h3>
